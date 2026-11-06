@@ -43,12 +43,89 @@
 }
 @media(prefers-reduced-motion:reduce){.result{transition:none}.result:hover{transform:none}}
 
+
+/* Result summary / print / PNG export - isolated UI, no calculation changes */
+.summary-open{background:#EF3B24;color:#fff;border-color:#EF3B24}
+.summary-open:hover{background:#CC321E}
+.summary-action-row{display:flex;justify-content:flex-end;margin:14px 0 4px}
+.summary-action-row button{width:100%;background:#FFF1EE;color:#B72A17;border-color:#FFD7CF}
+.summary-overlay[hidden]{display:none!important}
+.summary-overlay{position:fixed;inset:0;z-index:1000;background:rgba(15,23,42,.62);display:flex;align-items:center;justify-content:center;padding:16px}
+.summary-dialog{background:#F3F5F7;border-radius:18px;width:min(96vw,820px);height:min(96vh,1040px);display:flex;flex-direction:column;overflow:hidden;box-shadow:0 22px 70px rgba(0,0,0,.27)}
+.summary-toolbar{padding:14px 18px;display:flex;gap:8px;align-items:center;justify-content:space-between;flex-wrap:wrap;border-bottom:1px solid #E1E5EA;background:white}
+.summary-toolbar .summary-tools{display:flex;gap:7px;flex-wrap:wrap}
+.summary-toolbar button{min-height:38px;border-radius:9px;padding:0 13px}
+.summary-scroll{overflow:auto;padding:20px;overscroll-behavior:contain}
+.summary-sheet{background:white;max-width:740px;margin:0 auto;padding:38px 42px;color:#1A2434;box-shadow:0 2px 20px rgba(21,31,48,.1);font-family:Pretendard,-apple-system,BlinkMacSystemFont,"Noto Sans KR",Arial,sans-serif}
+.summary-sheet *{box-sizing:border-box}
+.summary-sheet .s-eyebrow{color:#EF3B24;font-weight:800;font-size:12px;letter-spacing:.08em}
+.summary-sheet .s-header{display:flex;justify-content:space-between;align-items:flex-start;gap:15px;border-bottom:3px solid #EF3B24;padding-bottom:15px}
+.summary-sheet h2{font-size:26px;line-height:1.3;margin:5px 0 4px;font-weight:900}
+.summary-sheet .s-sub{color:#687180;margin:0;font-size:12px}
+.summary-sheet .s-date{color:#667085;font-size:11px;white-space:nowrap;padding-top:4px}
+.summary-sheet .s-conditions{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px;margin-top:19px}
+.summary-sheet .s-condition{background:#F4F6F8;border:1px solid #EBEDF0;border-radius:9px;padding:11px 12px;min-width:0}
+.summary-sheet .s-label{font-size:10px;color:#667085}
+.summary-sheet .s-condition strong{display:block;font-size:13px;line-height:1.4;margin-top:4px;word-break:keep-all}
+.summary-sheet .s-total{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:14px 0 22px;padding:15px 18px;background:#FFF1EE;border:1px solid #FFD9D1;border-radius:10px}
+.summary-sheet .s-total span{font-size:14px;font-weight:800;color:#A62F20}
+.summary-sheet .s-total strong{font-size:25px;color:#A62F20;font-weight:900;font-variant-numeric:tabular-nums}
+.summary-sheet h3{font-size:15px;margin:19px 0 10px;font-weight:900}
+.summary-sheet .s-costgrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:7px}
+.summary-sheet .s-cost{border:1px solid #E7E9ED;border-radius:9px;padding:9px 10px;min-width:0}
+.summary-sheet .s-cost span{display:block;font-size:10px;color:#6C737F;line-height:1.3}
+.summary-sheet .s-cost strong{display:block;margin-top:3px;font-size:13px;line-height:1.4;white-space:nowrap;font-variant-numeric:tabular-nums}
+.summary-sheet .s-gen-table{width:100%;border-collapse:collapse;table-layout:fixed;font-size:12px}
+.summary-sheet .s-gen-table th{color:#555E6D;text-align:right;background:#F2F4F7;padding:10px 8px;font-size:11px}
+.summary-sheet .s-gen-table td{border-bottom:1px solid #E7E9EF;padding:12px 8px;vertical-align:middle;text-align:right;white-space:nowrap;font-variant-numeric:tabular-nums}
+.summary-sheet .s-gen-table th:first-child,.summary-sheet .s-gen-table td:first-child{text-align:left;width:35%;white-space:normal}
+.summary-sheet .s-gen-table td strong{color:#1A2434;font-weight:900}
+.summary-sheet .s-gen-table tr:last-child td{border-bottom:2px solid #DDE2E8}
+.summary-sheet .s-gen{font-weight:900;font-size:13px;display:block}
+.summary-sheet .s-gensub{color:#657080;font-size:10px;line-height:1.4;display:block;margin-top:3px}
+.summary-sheet .s-gen-table tr:nth-child(5) .s-gen{color:#D83A28}
+.summary-sheet .s-settings{font-size:11px;color:#475467;line-height:1.6;background:#F7F9FB;border-radius:9px;padding:10px 12px;margin-top:13px}
+.summary-sheet .s-disclaimer{font-size:10px;color:#5C6673;line-height:1.65;border-top:1px solid #E6E8ED;padding-top:11px;margin-top:18px;word-break:keep-all}
+.summary-sheet .s-footer{margin-top:16px;display:flex;justify-content:space-between;gap:10px;font-size:10px;font-weight:800;color:#657080}
+@media(max-width:640px){
+ .summary-overlay{padding:0}
+ .summary-dialog{width:100%;height:100%;max-height:100vh;border-radius:0}
+ .summary-scroll{padding:10px}
+ .summary-sheet{padding:20px 15px}
+ .summary-sheet h2{font-size:21px}
+ .summary-sheet .s-date{font-size:9px}
+ .summary-sheet .s-conditions{gap:5px}
+ .summary-sheet .s-condition{padding:7px}
+ .summary-sheet .s-condition strong{font-size:11px}
+ .summary-sheet .s-costgrid{gap:5px}
+ .summary-sheet .s-cost{padding:7px}
+ .summary-sheet .s-cost strong{font-size:11px}
+ .summary-sheet .s-gen-table{font-size:10px}
+ .summary-sheet .s-gen-table th,.summary-sheet .s-gen-table td{padding:9px 3px}
+}
+@page{size:A4 portrait;margin:12mm}
+@media print{
+ html,body{margin:0!important;padding:0!important;background:white!important}
+ body>.wrap{display:none!important}
+ .summary-overlay{position:static!important;inset:auto!important;display:block!important;padding:0!important;background:white!important;overflow:visible!important}
+ .summary-dialog{display:block!important;width:auto!important;height:auto!important;max-height:none!important;overflow:visible!important;border-radius:0!important;box-shadow:none!important}
+ .summary-toolbar{display:none!important}
+ .summary-scroll{display:block!important;overflow:visible!important;padding:0!important}
+ .summary-sheet{display:block!important;width:100%!important;max-width:none!important;box-shadow:none!important;padding:0!important;margin:0!important;break-inside:avoid;print-color-adjust:exact;-webkit-print-color-adjust:exact}
+ .summary-sheet h2{font-size:23px}
+ .summary-sheet .s-cost{padding:7px 9px}
+ .summary-sheet .s-gen-table td{padding:9px 8px}
+ .summary-sheet h3{margin:14px 0 8px}
+ .summary-sheet .s-total{margin:12px 0 16px;padding:11px 16px}
+ .summary-sheet .s-conditions{margin-top:14px}
+ .summary-sheet .s-disclaimer{margin-top:12px}
+}
 </style>
 </head>
 <body>
 <div class="wrap">
 <div class="topline"></div>
-<header class="header"><div><div class="brand">caring · 실손의료비 웹 계산기</div><h1>한 번 입력하고 1~5세대를 동시에 비교</h1><p class="sub">일반 비급여와 3대 비급여를 분리 입력합니다. 1·2세대는 해당 세대 구조에 맞게 합산하고, 3·4·5세대는 별도 특약 기준으로 계산합니다.</p></div><div class="actions"><button type="button" id="sample">교육 예시</button><button type="button" id="reset" class="primary">전체 초기화</button></div></header>
+<header class="header"><div><div class="brand">caring · 실손의료비 웹 계산기</div><h1>한 번 입력하고 1~5세대를 동시에 비교</h1><p class="sub">일반 비급여와 3대 비급여를 분리 입력합니다. 1·2세대는 해당 세대 구조에 맞게 합산하고, 3·4·5세대는 별도 특약 기준으로 계산합니다.</p></div><div class="actions"><button type="button" class="summary-open summary-open-trigger">한 장 요약본 만들기</button><button type="button" id="sample">교육 예시</button><button type="button" id="reset" class="primary">전체 초기화</button></div></header>
 <main class="layout">
 <section class="card">
 <h2 class="section-title">영수증·공통조건 <span class="pill">1회 입력</span></h2>
@@ -65,7 +142,7 @@
 <div class="sep"><div class="section-title">4세대</div><div class="grid3"><label>급여 입원 자기부담 누계<input id="g4priorSelf" value="0" inputmode="numeric"></label><label>일반 비급여 통원 기사용<input id="g4ncCount" value="0" inputmode="numeric"></label><label>도수 기지급<input id="g4manPaid" value="0" inputmode="numeric"></label><label>도수 기사용 횟수<input id="g4manCount" value="0" inputmode="numeric"></label><label>주사 기지급<input id="g4injPaid" value="0" inputmode="numeric"></label><label>주사 기사용 횟수<input id="g4injCount" value="0" inputmode="numeric"></label><label>MRI 기지급<input id="g4mriPaid" value="0" inputmode="numeric"></label></div></div>
 <div class="sep"><div class="section-title">5세대</div><div class="grid3"><label>급여 입원 자기부담 누계<input id="g5priorSelf" value="0" inputmode="numeric"></label><label>중증 입원 자기부담 누계<input id="g5sevSelf" value="0" inputmode="numeric"></label><label>일반 비급여 기지급<input id="g5ncPaid" value="0" inputmode="numeric"></label><label>비급여 통원 기사용<input id="g5ncCount" value="0" inputmode="numeric"></label><label>도수 기지급<input id="g5manPaid" value="0" inputmode="numeric"></label><label>도수 기사용 횟수<input id="g5manCount" value="0" inputmode="numeric"></label><label>주사 기지급<input id="g5injPaid" value="0" inputmode="numeric"></label><label>주사 기사용 횟수<input id="g5injCount" value="0" inputmode="numeric"></label><label>MRI 기지급<input id="g5mriPaid" value="0" inputmode="numeric"></label></div></div>
 </details><div id="warn" class="warn"></div></section>
-<section><div class="totalbox"><div class="total-label">총 실제 의료비</div><div id="total" class="total-value">0원</div><div id="conditionSummary" class="small"></div></div><div class="card barbox"><div class="section-title">세대별 예상 보험금 비교</div><div id="bars"></div></div><div id="results" class="result-list"></div><div class="disclaimer"><b style="color:var(--text)">교육용 예상 계산입니다.</b> 1세대는 표준화 이전이라 실제 증권·약관 조건을 우선 확인해야 하며, 실제 보험금은 가입시기·담보·한도·누적 지급액·횟수·의학적 필요성 등에 따라 달라질 수 있습니다.</div></section>
+<section><div class="totalbox"><div class="total-label">총 실제 의료비</div><div id="total" class="total-value">0원</div><div id="conditionSummary" class="small"></div></div><div class="card barbox"><div class="section-title">세대별 예상 보험금 비교</div><div id="bars"></div></div><div id="results" class="result-list"></div><div class="summary-action-row"><button type="button" class="summary-open-trigger">결과 요약본 · 출력 / 이미지 저장</button></div><div class="disclaimer"><b style="color:var(--text)">교육용 예상 계산입니다.</b> 1세대는 표준화 이전이라 실제 증권·약관 조건을 우선 확인해야 하며, 실제 보험금은 가입시기·담보·한도·누적 지급액·횟수·의학적 필요성 등에 따라 달라질 수 있습니다.</div></section>
 </main><footer>caring · 실손의료비 교육용 계산기<br>탄방케어링 오선근 CM</footer></div>
 <script>
 (()=>{const $=id=>document.getElementById(id),won=v=>Math.max(0,Math.round(Number.isFinite(v)?v:0)).toLocaleString('ko-KR')+'원',pct=v=>((Number.isFinite(v)?v:0)*100).toFixed(1)+'%',num=id=>{const v=Number(String($(id)?.value??'').replace(/[^0-9.-]/g,''));return Number.isFinite(v)?Math.max(0,v):0},cap=(v,m)=>Math.max(0,Math.min(v,m)),hospMin=()=>({clinic:10000,hospital:15000,general:15000,tertiary:20000}[$('hospital').value]||15000),g45PayMin=()=>['general','tertiary'].includes($('hospital').value)?20000:10000,roomPay=(room,days)=>Math.min(room*.5,Math.max(0,days)*100000),special=(amt,minDed,rate,prior,limit,count=null,countLimit=null)=>{if(countLimit!==null&&count>=countLimit)return 0;return Math.min(Math.max(0,limit-prior),Math.max(0,amt-Math.max(minDed,amt*rate)))},splitLimits=id=>$(id).value==='20_10'?[200000,100000]:[250000,50000],hospitalName=()=>({clinic:'의원',hospital:'병원',general:'종합병원',tertiary:'상급종합병원'}[$('hospital').value]);
@@ -81,5 +158,187 @@ $('total').textContent=won(total);$('conditionSummary').textContent=`${treat==='
 function sample(){const vals={payHosp:46100,nonHosp:195000,payRx:0,nonRx:0,manual:250000,inj:120000,mri:500000,excluded:0,room:0,days:0};Object.entries(vals).forEach(([k,v])=>$(k).value=v);$('treatment').value='out';$('hospital').value='general';$('severity').value='non';$('nhis').value='0.5';$('g1base').value='disease';updateG1Insured();$('g1insured').value='300000';$('g1rate').value='1';$('g1deduct').value='5000';$('g2period').value='late';updateG2Products();$('g2product').value='ii';$('g2split').value='25_5';$('g3product').value='ii';$('g3split').value='25_5';$('g3injException').checked=false;['g2priorSelf','g3priorSelf','g3manPaid','g3manCount','g3injPaid','g3injCount','g3mriPaid','g4priorSelf','g4ncCount','g4manPaid','g4manCount','g4injPaid','g4injCount','g4mriPaid','g5priorSelf','g5sevSelf','g5ncPaid','g5ncCount','g5manPaid','g5manCount','g5injPaid','g5injCount','g5mriPaid'].forEach(id=>$(id).value='0');calc()}
 function reset(){document.querySelectorAll('input').forEach(el=>{if(el.type==='checkbox')el.checked=false;else el.value='0'});$('treatment').value='out';$('hospital').value='general';$('severity').value='non';$('nhis').value='0.5';$('g1base').value='disease';$('g1rate').value='1';$('g1deduct').value='5000';updateG1Insured();$('g1insured').value='300000';$('g2period').value='late';updateG2Products();$('g2product').value='ii';$('g2split').value='25_5';$('g3product').value='ii';$('g3split').value='25_5';calc()}
 updateG2Products();updateG1Insured();document.querySelectorAll('input,select').forEach(el=>{el.addEventListener('input',calc);el.addEventListener('change',()=>{if(el.id==='g2period')updateG2Products();if(el.id==='treatment'||el.id==='g1base')updateG1Insured();calc()})});$('sample').addEventListener('click',sample);$('reset').addEventListener('click',reset);calc()})();
+</script>
+
+<div class="summary-overlay" id="summaryOverlay" hidden>
+  <div class="summary-dialog" role="dialog" aria-modal="true" aria-label="실손의료비 결과 요약본">
+    <div class="summary-toolbar">
+      <strong>계산 결과 한 장 요약본</strong>
+      <div class="summary-tools">
+        <button type="button" id="summaryPng" class="summary-open">이미지 저장 (PNG)</button>
+        <button type="button" id="summaryPrint" class="primary">인쇄 / PDF</button>
+        <button type="button" id="summaryClose">닫기</button>
+      </div>
+    </div>
+    <div class="summary-scroll"><div class="summary-sheet" id="summarySheet"></div></div>
+  </div>
+</div>
+<script>
+
+(function(){
+"use strict";
+var overlay=document.getElementById("summaryOverlay");
+var sheet=document.getElementById("summarySheet");
+var lastFocus=null,snapshot=null;
+function text(id){var el=document.getElementById(id);return el?(el.textContent||"").trim():"";}
+function choice(id){var el=document.getElementById(id);return el&&el.selectedOptions&&el.selectedOptions[0]?el.selectedOptions[0].textContent.trim():"";}
+function amount(id){
+ var el=document.getElementById(id),raw=el?String(el.value):"0";
+ var n=Number(raw.replace(/[^0-9.-]/g,""));
+ return Number.isFinite(n)?Math.max(0,n):0;
+}
+function money(n){return Math.round(n).toLocaleString("ko-KR")+"원";}
+function safe(s){return String(s==null?"":s).replace(/[&<>"']/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]});}
+var items=[
+ ["payHosp","급여 본인부담금"],["nonHosp","일반 비급여"],["payRx","급여 약제비"],
+ ["nonRx","비급여 약제비"],["manual","도수·체외충격파"],["inj","비급여 주사"],
+ ["mri","MRI / MRA"],["room","상급병실료 차액"],["excluded","보장 제외 금액"]
+];
+function getSnapshot(){
+ var cards=Array.from(document.querySelectorAll("#results>details.result")).map(function(el){
+  var meta=(el.querySelector(".rmeta")||{}).textContent||"";
+  var m=meta.match(/고객 부담\s*([^·]+).*보상률\s*(.*)/);
+  return {name:((el.querySelector(".rtitle")||{}).textContent||"").trim(),
+   sub:((el.querySelector(".rsub")||{}).textContent||"").trim(),
+   pay:((el.querySelector(".rmoney b")||{}).textContent||"").trim(),
+   own:m?m[1].trim():"-",rate:m?m[2].trim():"-"};
+ });
+ if(cards.length!==5){alert("계산 결과 5개 세대를 확인할 수 없습니다. 페이지를 새로고침해 주세요.");return null;}
+ var advanced=Array.from(document.querySelectorAll("input[id^=g]")).filter(function(el){
+  return el.type==="checkbox"?el.checked:amount(el.id)>0;
+ }).length;
+ return {date:new Date().toLocaleString("ko-KR",{year:"numeric",month:"2-digit",day:"2-digit",hour:"2-digit",minute:"2-digit"}),
+  treatment:choice("treatment"),hospital:choice("hospital"),severity:choice("severity"),
+  nhis:choice("nhis"),total:text("total"),cards:cards,
+  cost:items.map(function(x){return {label:x[1],val:money(amount(x[0]))};}),
+  days:amount("days"),specialTotal:text("specialTotal"),
+  g1:choice("g1base")+" · "+choice("g1insured"),g2:choice("g2period")+" · "+choice("g2product"),
+  g3:choice("g3product"),advanced:advanced,
+  warning:text("warn"),disclaimer:((document.querySelector(".disclaimer")||{}).textContent||"").replace(/\s+/g," ").trim()};
+}
+function render(s){
+ var cond=[["치료 유형",s.treatment+" · "+s.hospital],["5세대 비급여 구분",s.severity],["5세대 급여 통원 본인부담률",s.nhis]];
+ var html='<div class="s-header"><div><div class="s-eyebrow">CARING · MEDICAL EXPENSE REPORT</div><h2>실손의료비 계산 결과 요약</h2><p class="s-sub">1~5세대 예상 보험금 비교 · 교육용</p></div><div class="s-date">'+safe(s.date)+'</div></div>';
+ html+='<div class="s-conditions">'+cond.map(function(c){return '<div class="s-condition"><span class="s-label">'+safe(c[0])+'</span><strong>'+safe(c[1])+'</strong></div>';}).join("")+'</div>';
+ html+='<div class="s-total"><span>총 실제 의료비</span><strong>'+safe(s.total)+'</strong></div>';
+ html+='<h3>의료비 입력 내역</h3><div class="s-costgrid">'+s.cost.map(function(c){return '<div class="s-cost"><span>'+safe(c.label)+'</span><strong>'+safe(c.val)+'</strong></div>';}).join("")+'</div>';
+ html+='<h3>세대별 예상 보험금 비교</h3><table class="s-gen-table"><thead><tr><th>세대 / 적용 유형</th><th>예상 보험금</th><th>고객 부담</th><th>보상률</th></tr></thead><tbody>';
+ html+=s.cards.map(function(c){return '<tr><td><span class="s-gen">'+safe(c.name)+'</span><span class="s-gensub">'+safe(c.sub)+'</span></td><td><strong>'+safe(c.pay)+'</strong></td><td>'+safe(c.own)+'</td><td>'+safe(c.rate)+'</td></tr>';}).join("")+'</tbody></table>';
+ var settings="1세대 "+s.g1+"  |  2세대 "+s.g2+"  |  3세대 "+s.g3;
+ if(s.days)settings+="  |  입원일수 "+s.days+"일";
+ if(s.advanced)settings+="  |  세대별 추가 누적·예외조건 "+s.advanced+"개 적용";
+ html+='<div class="s-settings"><b>주요 적용조건</b> · '+safe(settings)+'</div>';
+ if(s.warning)html+='<p class="s-disclaimer" style="color:#A62F20">'+safe(s.warning)+'</p>';
+ html+='<div class="s-disclaimer">'+safe(s.disclaimer)+'</div>';
+ html+='<div class="s-footer"><span>caring · 실손의료비 1~5세대 통합 계산기</span><span>제작 | 탄방케어링 오선근 CM</span></div>';
+ sheet.innerHTML=html;
+}
+function openReport(){
+ snapshot=getSnapshot();if(!snapshot)return;
+ render(snapshot);lastFocus=document.activeElement;overlay.hidden=false;document.body.style.overflow="hidden";
+ document.getElementById("summaryClose").focus();
+}
+function closeReport(){
+ overlay.hidden=true;document.body.style.overflow="";
+ if(lastFocus&&lastFocus.focus)lastFocus.focus();
+}
+Array.from(document.querySelectorAll(".summary-open-trigger")).forEach(function(b){b.addEventListener("click",openReport);});
+document.getElementById("summaryClose").addEventListener("click",closeReport);
+overlay.addEventListener("click",function(e){if(e.target===overlay)closeReport();});
+document.addEventListener("keydown",function(e){if(e.key==="Escape"&&!overlay.hidden)closeReport();});
+document.getElementById("summaryPrint").addEventListener("click",function(){window.print();});
+function makeImage(s){
+ var canvas=document.createElement("canvas");canvas.width=2480;canvas.height=3508;
+ var ctx=canvas.getContext("2d");if(!ctx)throw Error("Canvas 미지원");
+ ctx.scale(2,2);
+ var W=1240,H=1754,navy="#172338",red="#EF3B24",muted="#667085",line="#E3E8EE";
+ ctx.fillStyle="#FFFFFF";ctx.fillRect(0,0,W,H);ctx.fillStyle=red;ctx.fillRect(0,0,W,13);
+ function font(size,bold){ctx.font=(bold?"800 ":"400 ")+size+'px Pretendard, "Noto Sans KR", "Malgun Gothic", sans-serif';}
+ function write(str,x,y,size,color,bold,align,maxWidth){
+  font(size,bold);ctx.fillStyle=color||navy;ctx.textAlign=align||"left";ctx.textBaseline="alphabetic";
+  if(maxWidth)ctx.fillText(String(str),x,y,maxWidth);else ctx.fillText(String(str),x,y);
+ }
+ function rounded(x,y,w,h,r,fill,stroke){
+  ctx.beginPath();ctx.roundRect(x,y,w,h,r);ctx.fillStyle=fill;ctx.fill();
+  if(stroke){ctx.strokeStyle=stroke;ctx.lineWidth=1.8;ctx.stroke();}
+ }
+ function section(label,y){
+  write(label,65,y,25,navy,true);ctx.fillStyle=red;ctx.fillRect(65,y+15,35,4);
+ }
+ write("CARING  ·  MEDICAL EXPENSE REPORT",65,73,19,red,true);
+ write("실손의료비 계산 결과 요약",65,135,49,navy,true);
+ write("1~5세대 예상 보험금 비교  ·  교육용",65,174,21,muted,false);
+ write(s.date,W-65,78,18,muted,false,"right");
+ ctx.fillStyle=red;ctx.fillRect(65,196,W-130,4);
+ var cond=[["치료 유형",s.treatment+" · "+s.hospital],["5세대 비급여",s.severity],["급여 통원 건보 본인부담률",s.nhis]];
+ cond.forEach(function(c,i){var x=65+i*377;rounded(x,222,357,105,13,"#F4F6F8","#E9EDF1");write(c[0],x+19,261,18,muted,false);write(c[1],x+19,303,26,navy,true,"left",316);});
+ rounded(65,349,1110,116,15,"#FFF1EE","#F9CFC6");
+ write("총 실제 의료비",92,412,28,"#A82B1B",true);
+ write(s.total,1142,425,48,"#A82B1B",true,"right",670);
+ section("의료비 입력 내역",516);
+ s.cost.forEach(function(c,i){
+  var col=i%3,row=Math.floor(i/3),x=65+col*377,y=546+row*84;
+  rounded(x,y,357,72,11,"#FCFCFD","#E7EAEE");
+  write(c.label,x+15,y+27,18,muted,false,"left",322);
+  write(c.val,x+15,y+57,24,navy,true,"left",322);
+ });
+ section("세대별 예상 보험금 비교",847);
+ var xx=[65,433,731,991,1175],tableTop=875;
+ rounded(65,tableTop,1110,53,9,"#F3F5F7",null);
+ write("세대 / 적용 유형",85,910,20,muted,true);
+ write("예상 보험금",708,910,20,muted,true,"right");
+ write("고객 부담",973,910,20,muted,true,"right");
+ write("보상률",1152,910,20,muted,true,"right");
+ var genColors=["#63758B","#3B82F6","#0D9488","#8B5CF6","#EF3B24"];
+ s.cards.forEach(function(c,i){
+  var yy=930+i*103;
+  if(i%2===0){ctx.fillStyle="#FAFBFC";ctx.fillRect(65,yy,1110,103);}
+  ctx.fillStyle=genColors[i];ctx.fillRect(65,yy+11,5,80);
+  write(c.name,86,yy+41,29,i===4?red:navy,true);
+  write(c.sub,86,yy+75,18,muted,false,"left",320);
+  write(c.pay,710,yy+53,26,navy,true,"right",270);
+  write(c.own,981,yy+53,23,navy,false,"right",240);
+  write(c.rate,1153,yy+53,23,navy,true,"right",140);
+  ctx.fillStyle=line;ctx.fillRect(65,yy+101,1110,1.5);
+ });
+ var settings="1세대 "+s.g1+"  |  2세대 "+s.g2+"  |  3세대 "+s.g3;
+ if(s.days)settings+="  |  입원 "+s.days+"일";
+ if(s.advanced)settings+="  |  추가 누적·예외조건 "+s.advanced+"개 적용";
+ rounded(65,1472,1110,76,10,"#F4F6F9",null);
+ write("주요 적용조건",82,1501,20,navy,true);
+ font(18,false);write(settings,82,1531,18,muted,false,"left",1075);
+ var desc=s.disclaimer;
+ if(s.warning)desc=s.warning+"  "+desc;
+ ctx.fillStyle=line;ctx.fillRect(65,1570,1110,2);
+ var lines=[],current="";
+ font(18,false);
+ Array.from(desc).forEach(function(ch){
+  var test=current+ch;
+  if(ctx.measureText(test).width>1105&&current){lines.push(current);current=ch;}else current=test;
+ });
+ if(current)lines.push(current);
+ lines.slice(0,4).forEach(function(l,i){write(l,65,1608+i*28,18,muted,false);});
+ ctx.fillStyle=line;ctx.fillRect(65,1711,1110,1);
+ write("caring · 실손의료비 1~5세대 통합 계산기",65,1739,18,muted,true);
+ write("제작 | 탄방케어링 오선근 CM",1175,1739,18,muted,true,"right");
+ return canvas;
+}
+document.getElementById("summaryPng").addEventListener("click",function(){
+ if(!snapshot)return;
+ var button=this,old=button.textContent;
+ button.disabled=true;button.textContent="이미지 생성 중";
+ try{
+  var canvas=makeImage(snapshot);
+  canvas.toBlob(function(blob){
+   button.disabled=false;button.textContent=old;
+   if(!blob){alert("이미지 생성에 실패했습니다.");return;}
+   var url=URL.createObjectURL(blob),a=document.createElement("a");
+   a.href=url;a.download="실손의료비_1-5세대_계산결과_요약.png";
+   document.body.appendChild(a);a.click();a.remove();
+   setTimeout(function(){URL.revokeObjectURL(url);},30000);
+  },"image/png");
+ }catch(err){button.disabled=false;button.textContent=old;alert("이미지를 저장할 수 없습니다: "+err.message);}
+});
+})();
 </script>
 </body></html>
