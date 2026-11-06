@@ -18,12 +18,38 @@
 .table-caption,.disclaimer,.section-desc,.helper,.settings-note,.small-label,.foot,.extra-line {word-break:keep-all;overflow-wrap:anywhere;}
 @media(max-width:700px){.detail-line{align-items:flex-start}.costs-table .period-cell{min-width:145px}.costs-table .frequency-cell{min-width:120px}}
 @media print {.table-wrap{overflow:visible}.data-table thead th,.data-table tbody td {white-space:normal}.costs-table .period-cell,.costs-table .frequency-cell {min-width:unset;max-width:none}#coverageTable tbody td:nth-child(2),#coverageTable tbody td:nth-child(3){min-width:unset}}
+
+/* v1.3 STEP03: 카테고리별 비교표와 열 제목 반복. 계산 데이터 불변 */
+.cost-groups {padding:0 0 4px;}
+.cost-section + .cost-section {margin-top:18px;}
+.cost-section-heading {padding:16px 18px 11px;background:#fff;display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;border-top:1px solid #e5e9ed;}
+.cost-section:first-child .cost-section-heading {border-top:0;}
+.cost-section-heading h3 {font-size:17px;font-weight:850;color:#273747;border-left:4px solid var(--red);padding-left:11px;margin:0;line-height:1.4;}
+.cost-section-heading .cost-count {color:#768392;font-size:12px;}
+.cost-section .costs-table {margin:0;}
+.cost-section .costs-table thead th {border-top:1px solid #e8ebee;}
+/* 가로 스크롤 시에도 치료방법 열이 좌측에 남도록 표시 */
+.cost-section .costs-table th:first-child {position:sticky;left:0;z-index:3;background:#f8fafc;box-shadow:2px 0 5px rgba(17,30,43,.05);}
+.cost-section .costs-table tbody td:first-child {position:sticky;left:0;z-index:2;background:#fff;box-shadow:2px 0 5px rgba(17,30,43,.05);}
+@media(max-width:700px){
+ .cost-section-heading {padding:14px 12px 10px;}
+ .cost-section-heading h3 {font-size:15px;}
+ .cost-section + .cost-section {margin-top:12px;}
+ .cost-section .costs-table th:first-child,.cost-section .costs-table tbody td:first-child {min-width:172px;max-width:195px;}
+}
+@media print {
+ .cost-section {break-inside:avoid;page-break-inside:avoid;}
+ .cost-section-heading {padding:5px 8px 3px;}
+ .cost-section-heading h3 {font-size:13px;}
+ .cost-section + .cost-section {margin-top:8px;}
+ .cost-section .costs-table th:first-child,.cost-section .costs-table tbody td:first-child {position:static;box-shadow:none;}
+}
 </style></head><body>
 <header class="masthead"><div class="mast-inner"><div class="brand"><div class="meritz">meritz</div><div class="brand-line"></div><div class="brand-sub">교육·상담용 시뮬레이터</div></div><div class="top-right">제작 · 탄방케어링 오선근 CM</div></div></header>
 <main class="page"><section class="hero"><div><div class="kicker">CANCER TREATMENT COVERAGE</div><h1>암통합치료비 보장 시뮬레이터</h1><p>가입 담보를 선택하면 치료방법별 급여·비급여 예상 지급액과 대표 치료비를 한눈에 비교합니다.</p></div><div class="hero-actions"><button class="button" id="resetBtn" type="button">예시 초기화</button><button class="button primary" id="printBtn" type="button">결과 인쇄 · PDF 저장</button></div></section>
 <section class="section" id="step01"><div class="section-head"><div><div class="step">STEP 01</div><h2>가입 담보 및 가입금액</h2></div><div class="section-desc">기본형과 실속형 중 하나만 선택할 수 있습니다. 비통치1은 판매중지된 기존 가입고객 분석용입니다.</div></div><div class="section-inner"><div class="plan-grid" id="planGrid"></div><div class="settings"><div><strong>비급여 담보 지급시점</strong><div class="settings-note">비통치2·비급여 주요치료형만 가입 첫 1년의 지급액 50% 적용</div></div><div><label><input type="radio" name="year" value="after" checked> 계약 1년 경과 후</label><label><input type="radio" name="year" value="first"> 계약 첫 1년 (보장개시 후)</label></div></div><div class="summary-strip" id="selectionSummary"></div><div id="selectionError" class="empty-warning hidden"></div></div></section>
 <section class="section" id="step02"><div class="section-head"><div><div class="step">STEP 02 · 핵심</div><h2>치료방법별 예상 보험금</h2></div><div class="section-desc">수술 · 약물 · 방사선의 모든 세부치료를 급여·비급여로 동시에 표시합니다. 금액을 누르면 포괄보장과 세부보장 산출 내역을 확인할 수 있습니다.</div></div><div class="key-points"><span><b>금액 단위</b> 만원</span><span><b>합산 방식</b> 포괄 + 특정치료 + 가입 담보별 합계</span><span><b>기준</b> 첫 치료·각 지급요건 충족</span></div><div class="table-wrap"><table class="data-table" id="coverageTable"><thead><tr><th>세부 치료방법</th><th style="text-align:right">급여 예상 보험금</th><th style="text-align:right">비급여·전액부담 예상 보험금</th><th>지급 내역</th></tr></thead><tbody id="coverageBody"></tbody></table></div><div class="table-caption">* 모바일에서는 표를 좌우로 스크롤해 보세요. 급여·비급여 각 열은 별도 시나리오이며 서로 더하는 금액이 아닙니다. 특정면역항암의 표적항암 추가 지급은 개별 요건 확인 전 기본 합계에 넣지 않고, 해당하는 경우의 추가 지급액을 별도로 표시합니다.</div><div class="extra-wrap"><details id="extraDetails" open><summary><span class="extra-title">기본형 추가 보장: 검사·통증완화·재활</span> <span class="show-more">펼치기 / 접기</span></summary><div class="extras-grid" id="extraRows"></div><p class="small-label">기본형 가입 시에만 지급 가능하며 검사·통증완화는 항목별 연간 1회, 재활은 1일 1회·연간 합산 20회 등 약관 조건 적용.</p></details></div><div class="disclaimer">이 화면은 교육·상담용 예상 지급액이며 실제 보험금 지급을 확정하지 않습니다. 이전 지급이 없는 단일 치료 사건을 가정하고, 지급횟수·보장 대상 여부·보험계약별 약관판본은 별도 확인해야 합니다. 비통치1 지급액은 구약관 원본이 없어 교육 리플렛을 기준으로 적용했습니다.</div></section>
-<section class="section" id="step03"><div class="section-head"><div><div class="step">STEP 03</div><h2>대표 치료비와 예상 보험금 비교</h2></div><div class="section-desc">STEP 02와 동일한 치료방법을 사용합니다. 수술은 1회, 약물·방사선은 대표 기간과 횟수를 기준으로 계산합니다.</div></div><div class="key-points"><span><b>치료비</b> 공개가격·약가·건강보험 수가 기반</span><span><b>차액</b> 예상 보험금 − 기준 치료비</span><span><b>비급여</b> 일부 약가 100%·수가 100% 모형</span></div><div class="table-wrap"><table class="data-table costs-table"><thead><tr><th rowspan="2">세부 치료방법</th><th rowspan="2">대표 기간</th><th rowspan="2">횟수</th><th colspan="3" style="text-align:center">급여 시나리오</th><th colspan="3" style="text-align:center">비급여·전액부담 시나리오</th><th rowspan="2">근거</th></tr><tr><th style="text-align:right">기준 치료비</th><th style="text-align:right">예상 보험금</th><th style="text-align:right">차액</th><th style="text-align:right">기준 치료비</th><th style="text-align:right">예상 보험금</th><th style="text-align:right">차액</th></tr></thead><tbody id="costBody"></tbody></table></div><div class="table-caption">* 모바일에서는 표를 좌우로 스크롤해 보세요. 금액은 만원 단위로 반올림. '-'는 비용 근거 미확보를 뜻하며 치료비가 0원이라는 뜻이 아닙니다. 일부 기간은 환자 평균이 아니라 대표 프로토콜입니다.</div><div class="disclaimer">항암제 급여 적용은 암종·치료차수·허가·산정특례 등 조건에 따라 달라집니다. 3D-CRT·IMRT의 비급여 금액은 병원 고시가격이 아닌 수가 100% 환산 모형입니다. CAR-T 급여 약가 5% 모형은 본인부담상한제 적용 전 값입니다. 진료비에는 검사·입원·부작용 치료 등 추가 항목이 포함될 수 있습니다. 특정면역항암에서 표적항암 보장까지 받을 경우의 추가금액은 STEP 03 기본 차액에 포함하지 않습니다. 교육용 정액보험금과 치료비 차액은 실제 환자의 최종 부담액이나 보험금 지급확정액이 아닙니다.</div></section>
+<section class="section" id="step03"><div class="section-head"><div><div class="step">STEP 03</div><h2>대표 치료비와 예상 보험금 비교</h2></div><div class="section-desc">STEP 02와 동일한 치료방법을 사용합니다. 수술은 1회, 약물·방사선은 대표 기간과 횟수를 기준으로 계산합니다.</div></div><div class="key-points"><span><b>치료비</b> 공개가격·약가·건강보험 수가 기반</span><span><b>차액</b> 예상 보험금 − 기준 치료비</span><span><b>비급여</b> 일부 약가 100%·수가 100% 모형</span></div><div id="costGroups" class="cost-groups" aria-label="수술·약물·방사선 치료비 비교"></div><div class="table-caption">* 모바일에서는 표를 좌우로 스크롤해 보세요. 금액은 만원 단위로 반올림. '-'는 비용 근거 미확보를 뜻하며 치료비가 0원이라는 뜻이 아닙니다. 일부 기간은 환자 평균이 아니라 대표 프로토콜입니다.</div><div class="disclaimer">항암제 급여 적용은 암종·치료차수·허가·산정특례 등 조건에 따라 달라집니다. 3D-CRT·IMRT의 비급여 금액은 병원 고시가격이 아닌 수가 100% 환산 모형입니다. CAR-T 급여 약가 5% 모형은 본인부담상한제 적용 전 값입니다. 진료비에는 검사·입원·부작용 치료 등 추가 항목이 포함될 수 있습니다. 특정면역항암에서 표적항암 보장까지 받을 경우의 추가금액은 STEP 03 기본 차액에 포함하지 않습니다. 교육용 정액보험금과 치료비 차액은 실제 환자의 최종 부담액이나 보험금 지급확정액이 아닙니다.</div></section>
 <footer class="foot"><span>제작 · 탄방케어링 오선근 CM</span><span>데이터 기준: 특별약관 106/108/112/114 · 비통치1 2025-10 교육 리플렛 · STEP03 2026-11-06 기준표</span><span>브라우저에서만 계산 · 개인정보 전송 없음</span></footer></main>
 <script>/* 암통합치료비 교육·상담용 단일 치료 시나리오 엔진
  * 화폐 단위: 만원. 데이터 기준: 최신 약관 106/108/112/114, 비통치1 교육 리플렛.
@@ -247,19 +273,21 @@
     return s.length?`<a class="source-link" href="${safe(s[0])}" target="_blank" rel="noopener noreferrer" title="${safe(row.caution)}">출처 보기</a>`:'<span class="small-label">대표 모형</span>';
   }
   
-  function renderCosts(){
-    const html=[];
-    for(const [g,rows] of Object.entries(groups)){
-      html.push(`<tr class="group"><td colspan="10">${g}</td></tr>`);
-      for(const r of rows){
-        const v=E.priceComparison(r.id,selection,r);
-        const s=v.insured,t=v.noncovered;
-        html.push(`<tr><td class="therapy">${safe(r.name)}<div class="small-label" >${safe(r.source_type)}</div></td><td class="period-cell">${safe(r.period)}</td><td class="frequency-cell">${safe(r.frequency)}</td><td class="money">${costCell(s.price)}</td><td class="money">${money(s.benefit)}</td><td class="money">${diffCell(s.diff,s.diff===null)}</td><td class="money">${costCell(t.price)}</td><td class="money">${money(t.benefit)}</td><td class="money">${diffCell(t.diff,t.diff===null)}</td><td>${sourceLinks(r)}</td></tr>`);
-      }
-    }
-    $('costBody').innerHTML=html.join('');
-  }
-  function redraw(){drawPlans();redrawSummary();renderCoverage();renderExtras();renderCosts();}
+   function renderCosts(){
+     // 카테고리마다 동일한 열 제목을 반복해 긴 화면에서도 금액의 의미를 확인하게 한다.
+     const tableHead=`<thead><tr><th rowspan="2" scope="col">세부 치료방법</th><th rowspan="2" scope="col">대표 기간</th><th rowspan="2" scope="col">횟수</th><th colspan="3" scope="colgroup" style="text-align:center">급여 시나리오</th><th colspan="3" scope="colgroup" style="text-align:center">비급여·전액부담 시나리오</th><th rowspan="2" scope="col">근거</th></tr><tr><th style="text-align:right" scope="col">기준 치료비</th><th style="text-align:right" scope="col">예상 보험금</th><th style="text-align:right" scope="col">차액</th><th style="text-align:right" scope="col">기준 치료비</th><th style="text-align:right" scope="col">예상 보험금</th><th style="text-align:right" scope="col">차액</th></tr></thead>`;
+     const all=[];
+     for(const [g,rows] of Object.entries(groups)){
+       const body=[];
+       for(const r of rows){
+         const v=E.priceComparison(r.id,selection,r);
+         const s=v.insured,t=v.noncovered;
+         body.push(`<tr><td class="therapy">${safe(r.name)}<div class="small-label">${safe(r.source_type)}</div></td><td class="period-cell">${safe(r.period)}</td><td class="frequency-cell">${safe(r.frequency)}</td><td class="money">${costCell(s.price)}</td><td class="money">${money(s.benefit)}</td><td class="money">${diffCell(s.diff,s.diff===null)}</td><td class="money">${costCell(t.price)}</td><td class="money">${money(t.benefit)}</td><td class="money">${diffCell(t.diff,t.diff===null)}</td><td>${sourceLinks(r)}</td></tr>`);
+       }
+       all.push(`<section class="cost-section" aria-label="${safe(g)} 치료비 비교"><div class="cost-section-heading"><h3>${safe(g)} 치료비 비교</h3><span class="cost-count">${rows.length}개 치료방법 · 급여 / 비급여 각각 표시</span></div><div class="table-wrap"><table class="data-table costs-table" aria-label="${safe(g)} 치료비와 보험금 비교표">${tableHead}<tbody>${body.join('')}</tbody></table></div></section>`);
+     }
+     $('costGroups').innerHTML=all.join('');
+   }  function redraw(){drawPlans();redrawSummary();renderCoverage();renderExtras();renderCosts();}
   document.querySelectorAll('input[name="year"]').forEach(r=>r.addEventListener('change',e=>{selection.firstYear=e.currentTarget.value==='first';redraw();}));
   $('printBtn').addEventListener('click',()=>window.print());
   $('resetBtn').addEventListener('click',()=>{
