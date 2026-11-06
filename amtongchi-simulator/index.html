@@ -1,0 +1,273 @@
+<!doctype html><html lang="ko"><head><meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/><title>암통합치료비 보장 시뮬레이터 | 탄방케어링</title><style>:root{--ink:#17202d;--muted:#647180;--line:#e1e5ea;--bg:#f7f8fa;--card:#fff;--red:#e84937;--red-dark:#cb3324;--pale:#fff1ef;--green:#0b7664;--black:#142435;--link:#3158a2; font-family:Pretendard,-apple-system,BlinkMacSystemFont,"Segoe UI","Apple SD Gothic Neo","Malgun Gothic",sans-serif;color:var(--ink)}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);line-height:1.5}button,select{font:inherit}a{color:var(--link)}.page{max-width:1500px;margin:auto;padding:28px 30px 90px}.masthead{background:#fff;border-bottom:1px solid var(--line)}.mast-inner{max-width:1500px;margin:auto;display:flex;align-items:center;justify-content:space-between;padding:16px 30px;gap:12px}.brand{display:flex;align-items:center;gap:13px}.meritz{font-weight:900;letter-spacing:-.035em;color:#d52b26;font-size:24px}.brand-line{width:1px;height:23px;background:#cfd4dc}.brand-sub{font-size:13px;color:#475468;font-weight:600}.top-right{font-size:12px;color:#627085}.hero{display:flex;justify-content:space-between;gap:28px;align-items:end;margin:25px 0 26px}.kicker{font-size:12px;color:var(--red-dark);font-weight:900;letter-spacing:.12em}.hero h1{font-size:clamp(27px,3vw,39px);letter-spacing:-.045em;line-height:1.2;margin:7px 0 11px}.hero p{margin:0;color:#5e6a7a;font-size:14px}.hero-actions{display:flex;gap:8px;flex-wrap:wrap}.button{background:#fff;border:1px solid #ccd3db;border-radius:9px;padding:10px 14px;font-size:13px;font-weight:700;cursor:pointer;color:#344052}.button:hover{background:#f2f4f7}.button.primary{background:var(--red);border-color:var(--red);color:#fff}.button.primary:hover{background:var(--red-dark)}.section{margin-top:23px;background:var(--card);border:1px solid var(--line);border-radius:16px;box-shadow:0 3px 16px rgba(20,30,45,.025);overflow:hidden}.section-head{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:19px 22px;border-bottom:1px solid var(--line)}.section-head .step{color:var(--red);font-weight:900;letter-spacing:.08em;font-size:12px}.section-head h2{font-size:20px;letter-spacing:-.04em;margin:2px 0 0}.section-desc{color:#667385;font-size:12px;max-width:590px;text-align:right}.section-inner{padding:20px 22px}.plan-grid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:11px}.plan{border:1px solid #dce1e6;border-radius:12px;padding:15px 14px;background:#fff;display:flex;flex-direction:column;gap:13px;min-width:0;cursor:pointer;transition:.15s}.plan.active{border-color:var(--red);background:#fffafa;box-shadow:inset 0 0 0 1px var(--red)}.plan-heading{display:flex;align-items:start;gap:8px;min-height:38px}.plan-heading input{accent-color:var(--red);width:17px;height:17px;flex:none;margin:3px 0 0}.plan-heading span{font-size:14px;line-height:1.45;font-weight:800;letter-spacing:-.025em}.mini-tag{font-size:10px;border:1px solid #e8c3bd;background:#fff0ec;padding:1px 4px;color:#a43b2b;border-radius:4px;white-space:nowrap}.plan select{width:100%;padding:10px 8px;border-radius:8px;border:1px solid #cbd4dc;background:#fff;font-weight:800;color:#24344b}.plan:not(.active) select{opacity:.43;pointer-events:none}.helper{font-size:11px;color:var(--muted)}.settings{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-top:16px;padding:13px 15px;background:#f6f7f9;border-radius:10px}.settings strong{font-size:13px}.settings label{display:flex;align-items:center;gap:9px;font-size:13px;cursor:pointer}.settings input{accent-color:var(--red)}.settings-note{font-size:11px;color:#717b87}.summary-strip{display:flex;gap:9px;flex-wrap:wrap;margin:15px 0 0}.summary-chip{border:1px solid #e2e6ea;background:#fff;border-radius:8px;padding:7px 10px;font-size:12px}.summary-chip b{color:var(--red-dark)}.empty-warning{color:#a53a31;background:#fff4ed;border:1px solid #f7d2c7;border-radius:9px;padding:10px 13px;margin-top:12px;font-size:13px}.key-points{display:flex;gap:12px;flex-wrap:wrap;padding:11px 22px;border-bottom:1px solid var(--line);background:#fcfcfd}.key-points span{font-size:12px;color:#5c6a79}.key-points b{color:#1e3042}.table-wrap{overflow-x:auto;overflow-y:visible}.data-table{width:100%;border-collapse:collapse;white-space:nowrap;min-width:740px;text-align:left;font-size:13px}.data-table thead th{padding:12px 14px;color:#435163;background:#f8fafc;border-bottom:1px solid var(--line);border-right:1px solid #edf0f3;font-size:12px;font-weight:800}.data-table tbody td{padding:13px 14px;border-bottom:1px solid #edf0f2}.data-table .group td{padding:9px 15px;background:#f4f5f7;color:#536273;font-size:12px;font-weight:900;letter-spacing:.02em}.data-table tbody tr:not(.group):hover{background:#fcf8f7}.data-table .therapy{font-weight:700;color:#283749}.money{text-align:right;font-variant-numeric:tabular-nums;font-weight:800}.money.noncovered{color:#c43829}.money.zero{color:#84919d;font-weight:500}.tiny{display:block;color:#8b95a2;font-size:10px;font-weight:500}.detail-button{background:none;border:1px solid #d8dde5;color:#526476;padding:5px 9px;border-radius:6px;font-size:11px;font-weight:700;cursor:pointer}.detail-button:hover{border-color:var(--red);color:var(--red-dark)}.detail-row td{background:#fdfcfc!important;padding:0 14px 13px!important}.detail-shell{border:1px solid #e9dde0;border-radius:10px;padding:13px 16px;background:#fff;font-size:12px;white-space:normal}.detail-shell h4{margin:0 0 8px;font-size:13px}.detail-line{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:5px 0;border-bottom:1px dashed #f0f0f0}.detail-line:last-child{border-bottom:0}.detail-line em{font-style:normal;color:#a33426;font-weight:700}.detail-notice{color:#707d89;margin-top:10px;font-size:11px;line-height:1.6}.costs-table{min-width:1250px}.costs-table th:nth-child(1){min-width:180px}.costs-table th:nth-child(2){min-width:100px}.costs-table th:nth-child(3){min-width:90px}.costs-table th:nth-child(n+4){min-width:120px}.costs-table td{vertical-align:middle}.cost-num{font-variant-numeric:tabular-nums}.gap-pos{color:#0b7664;font-weight:800}.gap-neg{color:#b43a29;font-weight:800}.gap-empty{color:#84919d}.pills{display:flex;gap:7px;flex-wrap:wrap}.pill{padding:3px 7px;border-radius:6px;background:#f0f3f5;color:#536474;font-size:10px;font-weight:600}.disclaimer{margin:17px 20px 20px;border-radius:9px;background:#f7f8f9;border:1px solid #ebedef;padding:12px 15px;color:#65717e;font-size:12px;line-height:1.75}.foot{font-size:12px;color:#84919d;margin:24px 4px;display:flex;flex-wrap:wrap;justify-content:space-between;gap:7px}.hidden{display:none!important}.legend{display:flex;gap:10px;flex-wrap:wrap}.legend i{font-style:normal;color:#a53e31}.source-link{font-size:10px;text-decoration:none;font-weight:600;white-space:nowrap}.source-link:hover{text-decoration:underline}.small-label{font-size:11px;color:#778392}.extras-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 16px}.extra-line{border-bottom:1px solid #ecedf0;display:flex;gap:10px;justify-content:space-between;padding:9px 3px;font-size:12px}.extra-line b{font-size:13px;white-space:nowrap}.extra-title{font-weight:900;font-size:14px;margin-bottom:9px}.extra-wrap{border-top:1px solid #e7e9ed;padding:20px 22px 22px}details summary{cursor:pointer;list-style:none}details summary::-webkit-details-marker{display:none}details .show-more{color:#b73b2d;font-size:12px;font-weight:800}.table-intro{font-size:12px;color:#647080}.note-box{background:#fff6f3;padding:10px 14px;margin-top:14px;border-left:3px solid #eb503f;font-size:12px;color:#7e5149}.table-caption{padding:10px 17px;color:#82909d;font-size:11px}.actions{display:flex;align-items:center;gap:8px}.badge{background:#f0f4f6;padding:4px 8px;border-radius:6px;color:#546477;font-size:10px;font-weight:800}
+@media(max-width:1160px){.plan-grid{grid-template-columns:repeat(3,minmax(0,1fr))}.hero{align-items:start}}@media(max-width:700px){.page{padding:17px 12px 60px}.mast-inner{padding:12px 14px}.brand-sub{display:none}.top-right{font-size:10px}.hero{display:block;margin:20px 4px}.hero h1{font-size:29px}.hero-actions{margin-top:16px}.section{border-radius:12px;margin-top:15px}.section-head{padding:16px;display:block}.section-desc{margin-top:8px;text-align:left}.section-inner{padding:14px}.plan-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.plan{padding:12px 10px}.plan-heading span{font-size:12px}.settings{align-items:start;flex-direction:column}.key-points{padding:12px 15px}.data-table{font-size:12px}.data-table thead th,.data-table td{padding:10px 11px}.extras-grid{grid-template-columns:1fr}.extra-wrap{padding:14px}.hero p{font-size:13px}}@media(max-width:380px){.plan-grid{grid-template-columns:1fr}.hero-actions{display:flex}.button{padding:9px 10px}}@media print{@page{size:A4 landscape;margin:9mm}.masthead,.hero-actions,.detail-button,.section-desc,.table-caption,.foot,.small-label,.settings-note{display:none!important}.page{max-width:none;padding:0}.hero{margin:9px 0}.hero h1{font-size:23px}.section{break-inside:avoid;box-shadow:none;margin:8px 0;border:1px solid #ddd}.section-head{padding:8px}.section-head h2{font-size:15px}.section-inner{padding:10px}.plan-grid{grid-template-columns:repeat(5,1fr)}.plan{padding:5px;gap:6px}.plan-heading span{font-size:10px}.plan select{padding:4px}.data-table{min-width:unset;font-size:9px}.data-table th,.data-table td{padding:3px 5px!important}.costs-table{min-width:unset}.costs-table th:nth-child(n){min-width:unset}.hidden{display:none!important}}
+
+/* v1.1: 안내 문구 전체 표시. 계산 로직·지급표는 v1.0 원본과 동일하게 보존. */
+.data-table thead th {white-space:normal;word-break:keep-all;overflow-wrap:anywhere;line-height:1.45;}
+.data-table .therapy {white-space:normal;word-break:keep-all;overflow-wrap:anywhere;min-width:175px;line-height:1.5;}
+.data-table .group td {white-space:normal;}
+#coverageTable .tiny {white-space:normal;word-break:keep-all;overflow-wrap:anywhere;line-height:1.45;margin-top:3px;}
+#coverageTable tbody td:nth-child(2),#coverageTable tbody td:nth-child(3) {min-width:158px;vertical-align:middle;}
+#coverageTable .money {white-space:normal;word-break:keep-all;overflow-wrap:anywhere;}
+.costs-table .period-cell,.costs-table .frequency-cell {white-space:normal;word-break:keep-all;overflow-wrap:anywhere;line-height:1.5;min-width:135px;max-width:205px;}
+.costs-table .period-cell {min-width:160px;}
+.costs-table .therapy .small-label {display:block;white-space:normal;word-break:keep-all;overflow-wrap:anywhere;margin-top:3px;line-height:1.45;}
+.costs-table td:last-child {white-space:normal;}
+.detail-line span,.detail-line strong {white-space:normal;word-break:keep-all;overflow-wrap:anywhere;min-width:0;}
+.detail-line em {white-space:normal;text-align:right;word-break:keep-all;overflow-wrap:anywhere;}
+.table-caption,.disclaimer,.section-desc,.helper,.settings-note,.small-label,.foot,.extra-line {word-break:keep-all;overflow-wrap:anywhere;}
+@media(max-width:700px){.detail-line{align-items:flex-start}.costs-table .period-cell{min-width:145px}.costs-table .frequency-cell{min-width:120px}}
+@media print {.table-wrap{overflow:visible}.data-table thead th,.data-table tbody td {white-space:normal}.costs-table .period-cell,.costs-table .frequency-cell {min-width:unset;max-width:none}#coverageTable tbody td:nth-child(2),#coverageTable tbody td:nth-child(3){min-width:unset}}
+</style></head><body>
+<header class="masthead"><div class="mast-inner"><div class="brand"><div class="meritz">meritz</div><div class="brand-line"></div><div class="brand-sub">교육·상담용 시뮬레이터</div></div><div class="top-right">제작 · 탄방케어링 오선근 CM</div></div></header>
+<main class="page"><section class="hero"><div><div class="kicker">CANCER TREATMENT COVERAGE</div><h1>암통합치료비 보장 시뮬레이터</h1><p>가입 담보를 선택하면 치료방법별 급여·비급여 예상 지급액과 대표 치료비를 한눈에 비교합니다.</p></div><div class="hero-actions"><button class="button" id="resetBtn" type="button">예시 초기화</button><button class="button primary" id="printBtn" type="button">결과 인쇄 · PDF 저장</button></div></section>
+<section class="section" id="step01"><div class="section-head"><div><div class="step">STEP 01</div><h2>가입 담보 및 가입금액</h2></div><div class="section-desc">기본형과 실속형 중 하나만 선택할 수 있습니다. 비통치1은 판매중지된 기존 가입고객 분석용입니다.</div></div><div class="section-inner"><div class="plan-grid" id="planGrid"></div><div class="settings"><div><strong>비급여 담보 지급시점</strong><div class="settings-note">비통치2·비급여 주요치료형만 가입 첫 1년의 지급액 50% 적용</div></div><div><label><input type="radio" name="year" value="after" checked> 계약 1년 경과 후</label><label><input type="radio" name="year" value="first"> 계약 첫 1년 (보장개시 후)</label></div></div><div class="summary-strip" id="selectionSummary"></div><div id="selectionError" class="empty-warning hidden"></div></div></section>
+<section class="section" id="step02"><div class="section-head"><div><div class="step">STEP 02 · 핵심</div><h2>치료방법별 예상 보험금</h2></div><div class="section-desc">수술 · 약물 · 방사선의 모든 세부치료를 급여·비급여로 동시에 표시합니다. 금액을 누르면 포괄보장과 세부보장 산출 내역을 확인할 수 있습니다.</div></div><div class="key-points"><span><b>금액 단위</b> 만원</span><span><b>합산 방식</b> 포괄 + 특정치료 + 가입 담보별 합계</span><span><b>기준</b> 첫 치료·각 지급요건 충족</span></div><div class="table-wrap"><table class="data-table" id="coverageTable"><thead><tr><th>세부 치료방법</th><th style="text-align:right">급여 예상 보험금</th><th style="text-align:right">비급여·전액부담 예상 보험금</th><th>지급 내역</th></tr></thead><tbody id="coverageBody"></tbody></table></div><div class="table-caption">* 모바일에서는 표를 좌우로 스크롤해 보세요. 급여·비급여 각 열은 별도 시나리오이며 서로 더하는 금액이 아닙니다. 특정면역항암의 표적항암 추가 지급은 개별 요건 확인 전 기본 합계에 넣지 않고, 해당하는 경우의 추가 지급액을 별도로 표시합니다.</div><div class="extra-wrap"><details id="extraDetails" open><summary><span class="extra-title">기본형 추가 보장: 검사·통증완화·재활</span> <span class="show-more">펼치기 / 접기</span></summary><div class="extras-grid" id="extraRows"></div><p class="small-label">기본형 가입 시에만 지급 가능하며 검사·통증완화는 항목별 연간 1회, 재활은 1일 1회·연간 합산 20회 등 약관 조건 적용.</p></details></div><div class="disclaimer">이 화면은 교육·상담용 예상 지급액이며 실제 보험금 지급을 확정하지 않습니다. 이전 지급이 없는 단일 치료 사건을 가정하고, 지급횟수·보장 대상 여부·보험계약별 약관판본은 별도 확인해야 합니다. 비통치1 지급액은 구약관 원본이 없어 교육 리플렛을 기준으로 적용했습니다.</div></section>
+<section class="section" id="step03"><div class="section-head"><div><div class="step">STEP 03</div><h2>대표 치료비와 예상 보험금 비교</h2></div><div class="section-desc">STEP 02와 동일한 치료방법을 사용합니다. 수술은 1회, 약물·방사선은 대표 기간과 횟수를 기준으로 계산합니다.</div></div><div class="key-points"><span><b>치료비</b> 공개가격·약가·건강보험 수가 기반</span><span><b>차액</b> 예상 보험금 − 기준 치료비</span><span><b>비급여</b> 일부 약가 100%·수가 100% 모형</span></div><div class="table-wrap"><table class="data-table costs-table"><thead><tr><th rowspan="2">세부 치료방법</th><th rowspan="2">대표 기간</th><th rowspan="2">횟수</th><th colspan="3" style="text-align:center">급여 시나리오</th><th colspan="3" style="text-align:center">비급여·전액부담 시나리오</th><th rowspan="2">근거</th></tr><tr><th style="text-align:right">기준 치료비</th><th style="text-align:right">예상 보험금</th><th style="text-align:right">차액</th><th style="text-align:right">기준 치료비</th><th style="text-align:right">예상 보험금</th><th style="text-align:right">차액</th></tr></thead><tbody id="costBody"></tbody></table></div><div class="table-caption">* 모바일에서는 표를 좌우로 스크롤해 보세요. 금액은 만원 단위로 반올림. '-'는 비용 근거 미확보를 뜻하며 치료비가 0원이라는 뜻이 아닙니다. 일부 기간은 환자 평균이 아니라 대표 프로토콜입니다.</div><div class="disclaimer">항암제 급여 적용은 암종·치료차수·허가·산정특례 등 조건에 따라 달라집니다. 3D-CRT·IMRT의 비급여 금액은 병원 고시가격이 아닌 수가 100% 환산 모형입니다. CAR-T 급여 약가 5% 모형은 본인부담상한제 적용 전 값입니다. 진료비에는 검사·입원·부작용 치료 등 추가 항목이 포함될 수 있습니다. 특정면역항암에서 표적항암 보장까지 받을 경우의 추가금액은 STEP 03 기본 차액에 포함하지 않습니다. 교육용 정액보험금과 치료비 차액은 실제 환자의 최종 부담액이나 보험금 지급확정액이 아닙니다.</div></section>
+<footer class="foot"><span>제작 · 탄방케어링 오선근 CM</span><span>데이터 기준: 특별약관 106/108/112/114 · 비통치1 2025-10 교육 리플렛 · STEP03 2026-11-06 기준표</span><span>브라우저에서만 계산 · 개인정보 전송 없음</span></footer></main>
+<script>/* 암통합치료비 교육·상담용 단일 치료 시나리오 엔진
+ * 화폐 단위: 만원. 데이터 기준: 최신 약관 106/108/112/114, 비통치1 교육 리플렛.
+ * 기존 지급기록/소진관리는 고의로 구현하지 않는다.
+ */
+(function (root) {
+  'use strict';
+  const PLANS = {
+    basic: { name:'암통치 기본형', options:[4000,8000,10000], amounts:{ general:[500,750,1000], similar:[100,150,200], imrt:[500,750,1000], robot:[500,750,1000], robot_special:[100,150,200], targeted:[1000,2000,3000], immune:[1000,2000,3000], proton:[1000,2000,3000] } },
+    lite: { name:'암통치 실속형', options:[1000,3000,5000,7000], amounts:{ general:[250,500,750,1000], similar:[50,100,150,200], targeted:[250,500,750,1000], immune:[250,500,750,1000], proton:[250,500,750,1000] } },
+    non2: { name:'비통치2', options:[4000,7000,10000], firstYearHalf:true, amounts:{ general:[500,750,1000], similar:[100,150,200], robot:[500,750,1000], robot_special:[100,150,200], targeted:[1000,2000,3000], immune:[1000,2000,3000], proton:[1000,2000,3000] } },
+    non1: { name:'비통치1', options:[2000,5000,8000], amounts:{ robot:[500,750,1000], robot_special:[100,150,200], targeted:[1000,2000,3000], immune:[1000,2000,3000], proton:[1000,2000,3000] } },
+    major: { name:'비급여 주요치료형', options:[3000,5000,7000], firstYearHalf:true, amounts:{ general:[500,750,1000], similar:[100,150,200] } }
+  };
+  const TREATMENT_MODE = {
+    surg_stomach:'surg_general', surg_colon:'surg_general', surg_lung:'surg_general', surg_breast:'surg_general', surg_thyroid:'surg_thyroid', surg_open:'surg_general',
+    robot_general:'robot_general', robot_prostate:'robot_prostate', robot_thyroid:'robot_thyroid',
+    chemo_standard:'med_general', target_tagrisso:'med_target', immune_keytruda:'med_immune', adc_enhertu:'med_immune', cart_kymria:'med_immune',
+    rad_standard:'rad_general', rad_imrt:'rad_imrt', rad_proton:'rad_proton', rad_carbon:'rad_carbon'
+  };
+  const FIXED_DISCLAIMERS = {
+    immune:'특정면역항암제 해당 여부는 실제 약제·적응증 확인이 필요합니다. 표적항암 추가지급은 별도 요건 확인 전 자동 합산하지 않습니다.',
+    cart:'CAR-T를 독립 지급담보로 추가하지 않으며, 특정면역항암 해당 여부는 약관·치료 요건 확인이 필요합니다.',
+    adc:'ADC를 별도 보장금으로 더하지 않으며, 해당 약제가 특정면역항암제 정의에 부합하는지 확인해야 합니다.',
+    carbon:'사용자 확정 교육기준: 중입자는 일반 항암방사선 포괄보장만 적용하며 양성자·IMRT 추가 지급항목은 적용하지 않습니다.'
+  };
+  function makeSelection(partial) {
+    return Object.assign({ basic:4000, lite:null, non2:4000, non1:null, major:null, firstYear:false }, partial||{});
+  }
+  function validateSelection(s) {
+    const problems=[];
+    if (s.basic!==null && s.lite!==null) problems.push('기본형과 실속형은 동시에 선택할 수 없습니다.');
+    Object.keys(PLANS).forEach(id=>{
+      if (s[id]!==null && !PLANS[id].options.includes(Number(s[id]))) problems.push(PLANS[id].name+'의 가입금액이 유효하지 않습니다.');
+    });
+    return problems;
+  }
+  function valueOf(id, sum, key, firstYear) {
+    const plan=PLANS[id], idx=plan.options.indexOf(Number(sum));
+    if (idx<0 || !plan.amounts[key]) return 0;
+    return plan.amounts[key][idx]*(plan.firstYearHalf && firstYear ? 0.5 : 1);
+  }
+  function coverageKeys(mode, noncovered) {
+    const results=[];
+    if (mode.startsWith('surg_')||mode.startsWith('robot_')) {
+      results.push(mode==='surg_thyroid'||mode==='robot_thyroid'?{key:'similar', label:'유사암 수술(포괄)'}:{key:'general',label:'일반암 수술(포괄)'});
+      if(mode==='robot_general') results.push({key:'robot',label:'다빈치수술(특정암 제외)'});
+      if(mode==='robot_prostate'||mode==='robot_thyroid') results.push({key:'robot_special',label:'특정암 다빈치수술'});
+    } else if(mode.startsWith('med_')) {
+      results.push({key:'general',label:'항암약물치료(포괄)'});
+      if(mode==='med_target') results.push({key:'targeted',label:'표적항암약물허가치료'});
+      if(mode==='med_immune') results.push({key:'immune',label:'특정면역항암약물허가치료'});
+    } else if(mode.startsWith('rad_')) {
+      results.push({key:'general',label:'항암방사선치료(포괄)'});
+      if(mode==='rad_imrt') results.push({key:'imrt',label:'항암세기조절방사선치료'});
+      if(mode==='rad_proton') results.push({key:'proton',label:'항암양성자방사선치료'});
+    }
+    return results;
+  }
+  function eligibleKey(id,key,noncovered) {
+    if(!noncovered && (id==='non1'||id==='non2'||id==='major')) return false;
+    if(!noncovered && (key==='robot'||key==='robot_special'||key==='targeted'||key==='immune'||key==='proton')) return false;
+    // IMRT is a non-급여-limited additional rider in basic; no extra in others.
+    return true;
+  }
+  function evaluate(id,selection,noncovered) {
+    const mode=TREATMENT_MODE[id];
+    if(!mode) throw Error('Unknown treatment '+id);
+    const problems=validateSelection(selection);
+    if(problems.length) return {total:null,byPlan:[],problems};
+    const requested=coverageKeys(mode,noncovered);
+    const byPlan=[];
+    let total=0;
+    for(const [planId,plan] of Object.entries(PLANS)) {
+      const sum=selection[planId];
+      if(sum===null) continue;
+      const lines=[];
+      for(const {key,label} of requested) {
+        if(!eligibleKey(planId,key,noncovered)) continue;
+        const amount=valueOf(planId,sum,key,selection.firstYear);
+        if(amount>0) lines.push({key,label,amount});
+      }
+      const raw=lines.reduce((a,v)=>a+v.amount,0);
+      const cap=Number(sum)*(plan.firstYearHalf&&selection.firstYear?0.5:1);
+      const amount=Math.min(raw,cap);
+      if(amount>0){total+=amount;byPlan.push({id:planId,name:plan.name,amount,raw,cap,lines});}
+    }
+    // 특정면역과 표적 두 지급항목에 동시 적격한 경우의 추가 후보액.
+    // 실제 개별 약제의 적격성이 확인되지 않았으므로 기본 합계에 자동 가산하지 않는다.
+    let conditionalTargetAdd=0;
+    if(noncovered && mode==='med_immune') {
+      for(const [planId,plan] of Object.entries(PLANS)) {
+        const sum=selection[planId];if(sum===null) continue;
+        const already=byPlan.find(p=>p.id===planId);
+        const raw=already?already.raw:0;
+        const cap=Number(sum)*(plan.firstYearHalf&&selection.firstYear?0.5:1);
+        const target=valueOf(planId,sum,'targeted',selection.firstYear);
+        conditionalTargetAdd+=Math.max(0,Math.min(raw+target,cap)-Math.min(raw,cap));
+      }
+    }
+    const warnings=[];
+    if(['immune_keytruda','adc_enhertu','cart_kymria'].includes(id)) warnings.push(FIXED_DISCLAIMERS.immune);
+    if(id==='adc_enhertu') warnings.push(FIXED_DISCLAIMERS.adc);
+    if(id==='cart_kymria') warnings.push(FIXED_DISCLAIMERS.cart);
+    if(id==='rad_carbon') warnings.push(FIXED_DISCLAIMERS.carbon);
+    if(selection.non1!==null) warnings.push('비통치1은 리플렛 교육용 지급표(구약관 원문 미확보)와 가입금액 상당 연간 총한도를 사용합니다.');
+    return {total,byPlan,conditionalTargetAdd,conditionalMaximum:total+conditionalTargetAdd,problems:[],warnings};
+  }
+  function priceComparison(id,selection,cost) {
+    const insured=evaluate(id,selection,false), noncovered=evaluate(id,selection,true);
+    function side(benefit,price){return {price:price===undefined?null:price,benefit:benefit.total,diff:price===null||price===undefined||benefit.total===null?null:benefit.total-price};}
+    return {insured:side(insured,cost.insured),noncovered:side(noncovered,cost.noncovered)};
+  }
+  // 기본형만 해당: 검사 8, 통증 1, 재활 2. 재활은 1회당 2만원(연 20회 한도).
+  const EXTRA = [
+    {id:'endoscopy',name:'암 내시경검사(급여)', amounts:[5,5,5], unit:'연 1회'},
+    {id:'mri',name:'암 MRI 촬영검사(급여)', amounts:[5,5,5], unit:'연 1회'},
+    {id:'pet',name:'암 PET 검사(급여)', amounts:[5,5,5], unit:'연 1회'},
+    {id:'gene',name:'암 특정단일유전자검사(급여)', amounts:[5,5,5], unit:'연 1회'},
+    {id:'sono',name:'암 초음파검사(급여)', amounts:[5,10,10], unit:'연 1회'},
+    {id:'ct',name:'암 CT 촬영검사(급여)', amounts:[5,10,10], unit:'연 1회'},
+    {id:'biopsy',name:'암 특정생검조직병리검사(급여)', amounts:[10,20,20], unit:'연 1회'},
+    {id:'ngs',name:'암 특정 NGS 유전자패널검사(급여)', amounts:[100,100,100], unit:'연 1회'},
+    {id:'pain',name:'암 특정통증완화치료(급여)',amounts:[30,40,50],unit:'연 1회'},
+    {id:'rehab_in',name:'입원 암 재활치료(급여)',amounts:[2,2,2],unit:'1일 1회·입원/외래 합산 연 20회'},
+    {id:'rehab_out',name:'외래 암 재활치료(급여)',amounts:[2,2,2],unit:'1일 1회·입원/외래 합산 연 20회'}
+  ];
+  function extraResult(selection) {
+    const idx=PLANS.basic.options.indexOf(Number(selection.basic));
+    return EXTRA.map(r=>({ ...r, amount:idx>=0?r.amounts[idx]:0 }));
+  }
+  const api={PLANS,TREATMENT_MODE,EXTRA,makeSelection,validateSelection,evaluate,priceComparison,extraResult,coverageKeys};
+  if(typeof module!=='undefined' && module.exports) module.exports=api;
+  root.CancerEngine=api;
+})(typeof window!=='undefined'?window:globalThis);
+</script><script>window.TREATMENT_COSTS=[{"id": "surg_stomach", "category": "수술", "name": "일반암 수술(위절제술 대표)", "insured": 72.8, "noncovered": null, "period": "수술 당일 1일 / 평균 입원기간 미확보", "frequency": "수술 1회", "interval": "해당 수술일", "source_type": "대표 행위·입원평균 미확보", "cost_unit": "수술 1회", "caution": "2023 전국 위암 수술 조사는 수술시간 등을 제시하나 이 표에 사용할 일치 평균 입원기간은 미확인. 1일은 수술 행위일이지 입원평균 아님.", "period_source": "https://pmc.ncbi.nlm.nih.gov/articles/PMC11739641/", "cost_source": "https://byeongwonbiyong.com/surgery/"}, {"id": "surg_colon", "category": "수술", "name": "일반암 수술(대장절제 대표)", "insured": 76.4, "noncovered": null, "period": "평균 입원 10.5일(2023)", "frequency": "수술 1회", "interval": "1회 수술", "source_type": "관측 평균 입원일수 + 수술 단회", "cost_unit": "수술 1회", "caution": "2023 심평원 항생제 적정성 평가 대상 대장수술 평균. 암종·술식 전체와 완전히 동일 표본은 아님.", "period_source": "https://www.hira.or.kr/cms/open/04/04/12/2024_6.pdf", "cost_source": "https://byeongwonbiyong.com/surgery/"}, {"id": "surg_lung", "category": "수술", "name": "일반암 수술(폐절제 대표)", "insured": 69.25, "noncovered": null, "period": "평균 입원 7.9일(2023)", "frequency": "수술 1회", "interval": "1회 수술", "source_type": "관측 평균 입원일수 + 수술 단회", "cost_unit": "수술 1회", "caution": "2023 심평원 항생제 적정성 평가 대상 폐절제 평균. 전체 폐암 환자의 평균 회복기간은 아님.", "period_source": "https://www.hira.or.kr/cms/open/04/04/12/2024_6.pdf", "cost_source": "https://byeongwonbiyong.com/surgery/"}, {"id": "surg_breast", "category": "수술", "name": "유방 부분절제(급여 대표)", "insured": 22.325, "noncovered": null, "period": "평균 입원 5.3일(2023)", "frequency": "수술 1회", "interval": "1회 수술", "source_type": "관측 평균 입원일수 + 수술 단회", "cost_unit": "수술 1회", "caution": "2023 심평원 자료의 유방수술 평균; 유방 부분절제만 분리한 평균 입원일수는 아님.", "period_source": "https://www.hira.or.kr/cms/open/04/04/12/2024_6.pdf", "cost_source": "https://byeongwonbiyong.com/surgery/"}, {"id": "surg_thyroid", "category": "수술", "name": "갑상선 수술(급여 대표)", "insured": 22.36, "noncovered": null, "period": "수술 후 평균 입원 3.6일(2022)", "frequency": "수술 1회", "interval": "1회 수술", "source_type": "단일기관 관측 평균 + 수술 단회", "cost_unit": "수술 1회", "caution": "2022 인하대병원 갑상선 수술 후 평균. 갑상선암만 분리한 전국 평균은 아님.", "period_source": "https://www.inha.com/assets/imc/file/2023_inha_outcomesbook_full.pdf", "cost_source": "https://byeongwonbiyong.com/surgery/"}, {"id": "surg_open", "category": "수술", "name": "개복·복강경·내시경 암수술", "insured": 72.8, "noncovered": null, "period": "수술 당일 1일 / 수술법 통합 평균 미확보", "frequency": "수술 1회", "interval": "개복·복강경·내시경 별도", "source_type": "대표 행위·평균 미확보", "cost_unit": "수술 1회", "caution": "서로 다른 암종·술식을 묶은 평균 치료일수는 제시할 수 없음. 필요 시 수술종류별 추가 분리.", "period_source": "https://www.hira.or.kr/cms/open/04/04/12/2024_6.pdf", "cost_source": "https://www.nhis.or.kr/ (근거: 본 시트 위절제술 기준, 비급여 실제 수술비 공시 없음)"}, {"id": "robot_general", "category": "수술", "name": "다빈치 일반암(특정암 제외)", "insured": null, "noncovered": 1200, "period": "수술 당일 1일 / 암종별 평균 입원 미확보", "frequency": "수술 1회", "interval": "암종별 상이", "source_type": "대표 행위·평균 미확보", "cost_unit": "수술 1회", "caution": "일반암 다빈치 전체를 대표하는 평균 입원일수 없음. 1일은 수술 일수.", "period_source": "https://pmc.ncbi.nlm.nih.gov/articles/PMC6424675/", "cost_source": "https://main.kbsmc.co.kr/main/nonpayment/list.do?sch_lclass=1&sch_mclass=12&sch_page=6&sch_search=1"}, {"id": "robot_prostate", "category": "수술", "name": "다빈치 전립선암(C61)", "insured": null, "noncovered": 1000, "period": "입원 중앙값 7일(국내 다기관 연구)", "frequency": "수술 1회", "interval": "로봇 전립선절제", "source_type": "관측 중앙값 + 수술 단회", "cost_unit": "수술 1회", "caution": "전립선암 로봇수술 연구의 입원일수 중앙값(평균 아님). 연구 시점·진료환경에 따라 차이.", "period_source": "https://pmc.ncbi.nlm.nih.gov/articles/PMC6424675/", "cost_source": "https://www.kbmaeil.com/article/20261101500198"}, {"id": "robot_thyroid", "category": "수술", "name": "다빈치 갑상선암(C73)", "insured": null, "noncovered": 1000, "period": "수술 당일 1일 / 로봇만 평균 미확보", "frequency": "수술 1회", "interval": "로봇 갑상선수술", "source_type": "대표 행위·평균 미확보", "cost_unit": "수술 1회", "caution": "인하대 2022 갑상선 전체 수술 후 평균은 3.6일이나 다빈치 전용 평균은 아님. 이 행에 평균 3.6일을 전용 통계처럼 사용하지 않음.", "period_source": "https://www.inha.com/assets/imc/file/2023_inha_outcomesbook_full.pdf", "cost_source": "https://www.kbmaeil.com/article/20261101500198"}, {"id": "chemo_standard", "category": "약물", "name": "일반 세포독성 항암(mFOLFOX6 대표)", "insured": 27.433740000000004, "noncovered": 548.6748, "period": "약 6개월(12주기 요법)", "frequency": "12주기", "interval": "2주 간격", "source_type": "표준·대표 치료 프로토콜", "cost_unit": "12주기·약제비만", "caution": "결장암 보조항암 mFOLFOX6 12주기 기준. 환자 실제 평균 치료기간/총주기는 아니며 용량감량·중단 가능.", "period_source": "https://www.cancer.gov/types/colorectal/hp/colon-treatment-pdq", "cost_source": "https://www.hira.or.kr/bbs/157/2025/04/BZ202504281521587.pdf; https://www.health.kr/drug/j7dv5ysumih2g; https://health.kr/searchDrug/result_drug.asp?drug_cd=A11APPPPP1095; https://www.health.kr/drug/8uhjyyhk1dc0z; https://www.health.kr/drug/2011031800003; https://www.health.kr/drug/2018032600026"}, {"id": "target_tagrisso", "category": "약물", "name": "표적항암(타그리소 80mg)", "insured": 346.9471, "noncovered": 6938.942, "period": "1년 비용 비교기간(실제 평균 아님)", "frequency": "365정(1일 1정)", "interval": "매일 복용", "source_type": "교육용 1년 가격모형", "cost_unit": "365정·1년", "caution": "적응증에 따라 진행 또는 부작용까지 지속, 보조요법은 최대 3년 등. 치료기간 1년을 환자 평균이라고 표기 금지.", "period_source": "https://www.dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=5e81b4a7-b971-45e1-9c31-29cea8c87ce7", "cost_source": "https://www.health.kr/drug/2016052000020"}, {"id": "immune_keytruda", "category": "약물", "name": "면역항암(키트루다 200mg)", "insured": 357.09452000000005, "noncovered": 7141.8904, "period": "1년 비용 비교기간(실제 평균 아님)", "frequency": "17회(200mg/3주)", "interval": "3주 간격", "source_type": "교육용 1년 가격모형", "cost_unit": "17회·1년", "caution": "적응증별 지속기간 차이. 200mg 3주 간격 모델이고 400mg 6주 간격도 존재; 실제 평균 횟수 아님.", "period_source": "https://dailymed.nlm.nih.gov/dailymed/drugInfo.cfm?setid=9333c79b-d487-4538-a9f0-71b91a02b287", "cost_source": "https://www.health.kr/drug/2015032400029"}, {"id": "adc_enhertu", "category": "약물", "name": "ADC 엔허투(70kg 유방암 예시)", "insured": 486.53047999999995, "noncovered": 9730.6096, "period": "1년 비용 비교기간(실제 평균 아님)", "frequency": "17회(5.4mg/kg/3주)", "interval": "3주 간격", "source_type": "교육용 1년 가격모형", "cost_unit": "17회·1년", "caution": "전이성 유방암 용량·70kg·17회 모형. 초기 유방암 14주기 등 적응증에 따라 다름. 투여기간 중앙값/평균은 별도 임상시험 자료.", "period_source": "https://medicalinformation.astrazeneca-us.com/prescribing-information/enhertu.html", "cost_source": "https://www.health.kr/drug/2022092000004"}, {"id": "cart_kymria", "category": "약물", "name": "CAR-T 킴리아", "insured": 1800, "noncovered": 36000, "period": "전체 치료과정 약 3개월 / 투여 단회", "frequency": "CAR-T 주입 1회", "interval": "제조·전처치·회복 포함", "source_type": "환자 안내 대표 과정", "cost_unit": "1회", "caution": "전체 3개월에는 제조·전처치·최초 회복을 포함. 실제 치료·추적 일정은 개별 환자별 다름.", "period_source": "https://aci.health.nsw.gov.au/projects/immune-effector-cell-service/information-about-treatment", "cost_source": "https://www.hematology.kr/CAR-TAndCellTherapy.do"}, {"id": "rad_standard", "category": "방사선", "name": "일반 방사선(3D-CRT 등)", "insured": 27.109404750000003, "noncovered": 542.188095, "period": "약 5주(25회 모델)", "frequency": "25회", "interval": "주 5회", "source_type": "교육용 대표 조사 코스", "cost_unit": "25회 조사료만", "caution": "질병관리청은 일반 방사선을 통상 주 5회, 2~8주로 설명. 25회·5주는 이 파일 비용 산식의 대표값이며 실측 평균 아님.", "period_source": "https://health.kdca.go.kr/healthinfo/biz/health/gnrlzHealthInfo/gnrlzHealthInfo/gnrlzHealthInfoView.do?cntnts_sn=6564", "cost_source": "https://www.hira.or.kr/ebooksc/2026/02/BZ202602273023260.pdf; https://www.kha.or.kr/kha_home/notice_list.do?articleNo=45894&mode=view; https://www.samsunghospital.com/home/proton/guide/faq.do"}, {"id": "rad_imrt", "category": "방사선", "name": "세기조절방사선 IMRT", "insured": 49.632121250000004, "noncovered": 992.642425, "period": "약 5주(25회 모델)", "frequency": "25회", "interval": "주 5회", "source_type": "교육용 대표 조사 코스", "cost_unit": "25회 조사료만", "caution": "IMRT는 적용 암종·목표·분할에 따라 5회 등 짧은 코스도 가능. 25회는 앞선 HD141 조사료 모델과 일치시키기 위한 예시.", "period_source": "https://health.kdca.go.kr/healthinfo/biz/health/gnrlzHealthInfo/gnrlzHealthInfo/gnrlzHealthInfoView.do?cntnts_sn=6564", "cost_source": "https://www.hira.or.kr/ebooksc/2026/02/BZ202602273023260.pdf; https://www.kha.or.kr/kha_home/notice_list.do?articleNo=45894&mode=view; https://www.samsunghospital.com/home/proton/guide/faq.do"}, {"id": "rad_proton", "category": "방사선", "name": "양성자치료", "insured": 250, "noncovered": 1750, "period": "약 5주(25회 비용 사례)", "frequency": "25회", "interval": "통상 평일 조사", "source_type": "교육용 공개 비용 사례", "cost_unit": "25회 코스", "caution": "국립암센터는 종양별로 수일~5~7주 이상 차이로 안내. 25회는 기존 치료비 기준 사례의 횟수이지 전국 평균 아님.", "period_source": "https://xn--3e0bn7uryf0pe0ts.kr/main.ncc?uri=proton_faq", "cost_source": "https://mobile.newsis.com/view/NISX20230613_0002337019"}, {"id": "rad_carbon", "category": "방사선", "name": "중입자치료", "insured": null, "noncovered": 5500, "period": "약 3주(췌장암 사례)", "frequency": "12회", "interval": "주 4회", "source_type": "국내 병원 치료 사례", "cost_unit": "1코스", "caution": "연세암병원 공개 췌장암 사례 12회/3주; 간암은 4회/1주 사례도 있음. 12회를 중입자 전체 평균이라고 표기 금지.", "period_source": "https://www.yna.co.kr/view/AKR20240528131600530", "cost_source": "https://refininfo.com/heavy-ion-therapy-cost/"}];</script><script>(() => {
+  'use strict';
+  const E = window.CancerEngine;
+  const costs=window.TREATMENT_COSTS;
+  const selection=E.makeSelection();
+  let openDetail=null;
+  const nf=new Intl.NumberFormat('ko-KR',{maximumFractionDigits:1});
+  const $=id=>document.getElementById(id);
+  const safe=x=>String(x===null||x===undefined?'':x).replace(/[&<>"']/g,t=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[t]));
+  const money=(n,unit=true)=>n===null||n===undefined?'—':nf.format(n)+(unit?'만원':'');
+  const groups={수술:[],약물:[],방사선:[]};
+  costs.forEach(x=>groups[x.category]?.push(x));
+  function headerTitle(planId){return E.PLANS[planId].name+(planId==='non1'?' <span class="mini-tag">판매중지</span>':'');}
+  function drawPlans(){
+    $('planGrid').innerHTML=Object.keys(E.PLANS).map(id=>{
+      const p=E.PLANS[id],on=selection[id]!==null;
+      const description=id==='non1'?'기존 가입고객 분석용':id==='basic'?'검사·통증·재활 포함':id==='lite'?'핵심 보장 중심':id==='non2'?'비급여 포괄+특정치료':'비급여 주요치료';
+      return `<div class="plan ${on?'active':''}" data-plan="${id}"><label class="plan-heading"><input type="checkbox" data-plan-check="${id}" ${on?'checked':''}><span>${headerTitle(id)}</span></label><select aria-label="${p.name} 가입금액" data-plan-amount="${id}" ${on?'':'disabled'}>${p.options.map(a=>`<option value="${a}" ${Number(selection[id]??p.options[0])===a?'selected':''}>${nf.format(a)}만원</option>`).join('')}</select><span class="helper">${description}</span></div>`;
+    }).join('');
+    $('planGrid').querySelectorAll('[data-plan-check]').forEach(box=>box.addEventListener('change',ev=>{
+      const id=ev.currentTarget.dataset.planCheck, checked=ev.currentTarget.checked;
+      if(checked && id==='basic') selection.lite=null;
+      if(checked && id==='lite') selection.basic=null;
+      selection[id]=checked?(selection[id]??E.PLANS[id].options[0]):null;
+      redraw();
+    }));
+    $('planGrid').querySelectorAll('[data-plan-amount]').forEach(select=>select.addEventListener('change',ev=>{
+      selection[ev.currentTarget.dataset.planAmount]=Number(ev.currentTarget.value);
+      redraw();
+    }));
+  }
+  function redrawSummary(){
+    const chosen=Object.keys(E.PLANS).filter(id=>selection[id]!==null);
+    $('selectionSummary').innerHTML=chosen.length?chosen.map(id=>`<span class="summary-chip">${safe(E.PLANS[id].name)} <b>${nf.format(selection[id])}만원</b></span>`).join(''):'<span class="summary-chip">가입 담보를 선택하세요.</span>';
+    const errs=E.validateSelection(selection);$('selectionError').classList.toggle('hidden',!errs.length);
+    $('selectionError').textContent=errs.join(' ');
+  }
+  function benefitNumber(id,noncovered) {
+    if(!Object.keys(E.PLANS).some(p=>selection[p]!==null)) return '<span class="money zero">미가입</span>';
+    const v=E.evaluate(id,selection,noncovered);
+    if(v.total===null)return '<span class="money zero">확인 필요</span>';
+    const conditional=noncovered&&v.conditionalTargetAdd>0?`<span class="tiny">표적항암도 보장 대상이면 ${money(v.conditionalMaximum)}</span>`:'';
+    return v.total>0?`<span class="money ${noncovered?'noncovered':''}">${money(v.total)}${conditional}</span>`:'<span class="money zero">0만원<span class="tiny">가입 담보에서 해당 항목 없음</span></span>';
+  }
+  function breakdownBlock(id,noncovered) {
+    const v=E.evaluate(id,selection,noncovered);
+    const title=noncovered?'비급여·전액본인부담':'급여';
+    const blocks=v.byPlan.length?v.byPlan.map(p=>{
+      return `<div style="margin-top:11px"><b>${safe(p.name)}</b> <span class="small-label">가입 ${nf.format(selection[p.id])}만원</span>
+      ${p.lines.map(line=>`<div class="detail-line"><span>${safe(line.label)}</span><em>+ ${money(line.amount)}</em></div>`).join('')}
+      ${p.raw>p.amount?`<div class="detail-line"><span>해당 담보 연간 한도 적용 (${money(p.cap)})</span><em>− ${money(p.raw-p.amount)}</em></div>`:''}
+      <div class="detail-line"><strong>담보 합계</strong><strong>${money(p.amount)}</strong></div></div>`;
+    }).join(''):'<div class="small-label" style="padding-top:12px">현재 선택한 담보에서 이 시나리오에 해당하는 지급항목이 없습니다.</div>';
+    const candidate=v.conditionalTargetAdd>0?`<div class="detail-line" style="margin-top:8px;color:#a1392c"><strong>표적항암 보장도 받을 수 있는 경우</strong><em>최대 ${money(v.conditionalMaximum)} (추가 ${money(v.conditionalTargetAdd)})</em></div>`:'';
+    return `<div><h4>${title} · 예상 ${money(v.total)}</h4>${blocks}${candidate}</div>`;
+  }
+  function detailMarkup(row){
+    const warns=E.evaluate(row.id,selection,true).warnings;
+    const generalNotes=[
+      '계약상 보장개시일 경과, 암종·치료방법·허가조건 충족, 해당 항목 첫 지급을 가정한 교육용 계산입니다.',
+      ...warns
+    ];
+    return `<tr class="detail-row"><td colspan="4"><div class="detail-shell"><div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px">${breakdownBlock(row.id,false)}${breakdownBlock(row.id,true)}</div><div class="detail-notice">${generalNotes.map(safe).join('<br>')}</div></div></td></tr>`;
+  }
+  function renderCoverage(){
+    const html=[];
+    for(const [g,rows] of Object.entries(groups)){
+      html.push(`<tr class="group"><td colspan="4">${g} <span class="small-label">${rows.length}개 치료방법</span></td></tr>`);
+      for(const row of rows){
+        html.push(`<tr><td class="therapy">${safe(row.name)}</td><td style="text-align:right">${benefitNumber(row.id,false)}</td><td style="text-align:right">${benefitNumber(row.id,true)}</td><td><button type="button" class="detail-button" data-detail="${row.id}" aria-expanded="${openDetail===row.id}">${openDetail===row.id?'내역 닫기':'내역 보기'}</button></td></tr>`);
+        if(openDetail===row.id) html.push(detailMarkup(row));
+      }
+    }
+    $('coverageBody').innerHTML=html.join('');
+    $('coverageBody').querySelectorAll('[data-detail]').forEach(b=>b.addEventListener('click',ev=>{const id=ev.currentTarget.dataset.detail;openDetail=(openDetail===id?null:id);renderCoverage();}));
+  }
+  function renderExtras(){
+    const rows=E.extraResult(selection);
+    const basic=selection.basic!==null;
+    $('extraRows').innerHTML=rows.map(r=>`<div class="extra-line"><div>${safe(r.name)}<div class="small-label">${safe(r.unit)}</div></div><b>${basic?money(r.amount):'미가입'}</b></div>`).join('');
+  }
+  function costCell(n){return n===null||n===undefined?'<span class="gap-empty">—</span>':`<span class="cost-num">${money(n)}</span>`;}
+  function diffCell(n,unknown){if(unknown)return '<span class="gap-empty">산정 불가</span>';return `<span class="${n>=0?'gap-pos':'gap-neg'}">${n>=0?'+':'−'}${money(Math.abs(n))}</span>`;}
+  function sourceLinks(row){
+    const s=(row.cost_source||'').split(';').map(v=>v.trim()).filter(v=>v.startsWith('https://'));
+    return s.length?`<a class="source-link" href="${safe(s[0])}" target="_blank" rel="noopener noreferrer" title="${safe(row.caution)}">출처 보기</a>`:'<span class="small-label">대표 모형</span>';
+  }
+  
+  function renderCosts(){
+    const html=[];
+    for(const [g,rows] of Object.entries(groups)){
+      html.push(`<tr class="group"><td colspan="10">${g}</td></tr>`);
+      for(const r of rows){
+        const v=E.priceComparison(r.id,selection,r);
+        const s=v.insured,t=v.noncovered;
+        html.push(`<tr><td class="therapy">${safe(r.name)}<div class="small-label" >${safe(r.source_type)}</div></td><td class="period-cell">${safe(r.period)}</td><td class="frequency-cell">${safe(r.frequency)}</td><td class="money">${costCell(s.price)}</td><td class="money">${money(s.benefit)}</td><td class="money">${diffCell(s.diff,s.diff===null)}</td><td class="money">${costCell(t.price)}</td><td class="money">${money(t.benefit)}</td><td class="money">${diffCell(t.diff,t.diff===null)}</td><td>${sourceLinks(r)}</td></tr>`);
+      }
+    }
+    $('costBody').innerHTML=html.join('');
+  }
+  function redraw(){drawPlans();redrawSummary();renderCoverage();renderExtras();renderCosts();}
+  document.querySelectorAll('input[name="year"]').forEach(r=>r.addEventListener('change',e=>{selection.firstYear=e.currentTarget.value==='first';redraw();}));
+  $('printBtn').addEventListener('click',()=>window.print());
+  $('resetBtn').addEventListener('click',()=>{
+    Object.assign(selection,E.makeSelection());document.querySelector('input[name="year"][value="after"]').checked=true;
+    openDetail=null;redraw();
+  });
+  window.SIM_APP={selection,redraw,getRows:()=>costs};
+  redraw();
+})();
+</script>
+</body></html>
