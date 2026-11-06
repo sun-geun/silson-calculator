@@ -63,47 +63,31 @@
  .cost-section .costs-table th:first-child,.cost-section .costs-table tbody td:first-child {position:static;box-shadow:none;}
 }
 
-/* v1.5 - 별도 한 장짜리 A4 인쇄 요약. 화면/계산기 레이아웃 및 계산엔진 수정 없음. */
+/* v1.6 - 화재보험 요약정리 방식: 화면과 분리된 A4 세로 보고서 미리보기 + PNG/PDF */
 .print-report{display:none}
+.report-dialog{border:0;border-radius:18px;padding:0;width:min(760px,calc(100vw - 20px));max-height:calc(100vh - 25px);box-shadow:0 20px 70px rgba(16,36,61,.32);color:#25364a;overflow:hidden}
+.report-dialog::backdrop{background:rgba(20,37,58,.68)}
+.report-head{padding:16px 20px;display:flex;justify-content:space-between;align-items:center;gap:12px;background:#fff;border-bottom:1px solid #e2e6eb}
+.report-head strong{font-size:19px;letter-spacing:-.03em}
+.report-image-wrap{padding:19px 14px;background:#e9edf2;max-height:calc(100vh - 195px);overflow:auto;text-align:center}
+.report-image-wrap img{display:block;width:min(100%,555px);height:auto;margin:auto;background:white;box-shadow:0 6px 25px rgba(32,50,71,.2)}
+.report-actions{display:flex;flex-wrap:wrap;gap:9px;padding:13px 20px;background:#fff;border-top:1px solid #e2e6eb;justify-content:flex-end}
+.report-actions .button{white-space:normal}
+@media(max-width:700px){.report-head{padding:13px}.report-actions{padding:12px;justify-content:stretch}.report-actions .button{flex:1;font-size:12px;padding:10px 8px}.report-image-wrap{padding:10px;max-height:calc(100vh - 188px)}}
 @media print {
-  @page{size:A4 landscape;margin:8mm 9mm}
-  html,body{background:#fff!important;margin:0!important;padding:0!important}
-  body>.masthead,body>main{display:none!important}
-  #printReport{display:block!important;width:100%!important;max-width:none!important;padding:0!important;margin:0!important;
-    font-family:Pretendard,"Malgun Gothic","Apple SD Gothic Neo",sans-serif!important;color:#253040!important;font-size:10px!important;line-height:1.4}
-  #printReport *{box-sizing:border-box}
-  #printReport .pr-heading{display:flex;justify-content:space-between;align-items:start;gap:15px;border-bottom:2px solid #dd392b;padding-bottom:8px;margin-bottom:9px}
-  #printReport .pr-heading h1{font-size:21px!important;line-height:1.25!important;letter-spacing:-.04em;margin:0 0 4px!important;color:#b72c21!important}
-  #printReport .pr-heading p{font-size:10.5px;color:#6a7582;margin:0!important}
-  #printReport .pr-stamp{font-size:10px;color:#687684;text-align:right;white-space:nowrap;line-height:1.6}
-  #printReport .pr-plan-box{background:#f5f7f9;border:1px solid #dce3e8;border-radius:5px;padding:9px 11px;margin-bottom:10px;break-inside:avoid}
-  #printReport .pr-plan-title{font-size:11px;font-weight:800;margin-bottom:3px;color:#28374a}
-  #printReport .pr-plan-items{font-size:11px;font-weight:650;line-height:1.45;white-space:normal}
-  #printReport .pr-plan-sub{font-size:9.5px;color:#6a7582;margin-top:2px}
-  #printReport .pr-summary-line{display:flex;justify-content:space-between;align-items:center;gap:10px;margin:0 0 5px;font-size:10px}
-  #printReport .pr-summary-line strong{font-size:12px}
-  #printReport table{width:100%;table-layout:fixed;border-collapse:collapse;font-size:10px!important;line-height:1.3;white-space:normal!important}
-  #printReport th{padding:5px 4px;border:1px solid #cfd8e1;text-align:center;background:#eaf0f4;color:#334356;font-weight:800;white-space:normal!important}
-  #printReport td{padding:5px 5px;border-bottom:1px solid #e3e7eb;vertical-align:middle;font-variant-numeric:tabular-nums;white-space:normal!important;overflow-wrap:anywhere}
-  #printReport tr{break-inside:avoid;page-break-inside:avoid}
-  #printReport tbody tr:nth-child(even):not(.pr-group){background:#f9fafb}
-  #printReport .pr-group td{padding:5px 7px!important;background:#f3e7e5!important;font-size:10.5px;font-weight:900;color:#98372d;border-top:1px solid #e8cfc9;border-bottom:1px solid #e7d0cb}
-  #printReport .pr-name{font-weight:700;word-break:keep-all}
-  #printReport .pr-timing{color:#506073;font-size:9.2px;word-break:keep-all}
-  #printReport .pr-number{text-align:right;white-space:nowrap!important;font-weight:600}
-  #printReport .pr-positive{color:#006353}
-  #printReport .pr-negative{color:#a93428}
-  #printReport .pr-unknown{color:#8995a2;font-weight:450}
-  #printReport .pr-note{margin-top:9px;font-size:9.3px;line-height:1.55;color:#5c6877;padding:7px 10px;background:#f8f9fa;border-left:2px solid #e66b5c;break-inside:avoid}
-  #printReport .pr-footer{display:flex;align-items:center;justify-content:space-between;gap:10px;color:#76818f;font-size:9px;padding-top:8px;margin-top:7px;border-top:1px solid #dfe4e9}
+ @page{size:A4 portrait;margin:0}
+ html,body{margin:0!important;padding:0!important;width:210mm!important;background:#fff!important}
+ body>.masthead,body>main,body>.report-dialog,dialog,.report-dialog{display:none!important}
+ #printReport{display:block!important;margin:0!important;padding:0!important;position:static!important;width:210mm!important;height:297mm!important;overflow:hidden!important;break-inside:avoid!important}
+ #printReport img{display:block!important;margin:0!important;padding:0!important;width:210mm!important;height:297mm!important;object-fit:fill!important;break-inside:avoid!important}
 }
 </style></head><body>
 <header class="masthead"><div class="mast-inner"><div class="brand"><div class="meritz">meritz</div><div class="brand-line"></div><div class="brand-sub">교육·상담용 시뮬레이터</div></div><div class="top-right">제작 · 탄방케어링 오선근 CM</div></div></header>
-<main class="page"><section class="hero"><div><div class="kicker">CANCER TREATMENT COVERAGE</div><h1>암통합치료비 보장 시뮬레이터</h1><p>가입 담보를 선택하면 치료방법별 급여·비급여 예상 지급액과 대표 치료비를 한눈에 비교합니다.</p></div><div class="hero-actions"><button class="button" id="resetBtn" type="button">예시 초기화</button><button class="button primary" id="printBtn" type="button">요약 결과 인쇄 · PDF 저장</button></div></section>
+<main class="page"><section class="hero"><div><div class="kicker">CANCER TREATMENT COVERAGE</div><h1>암통합치료비 보장 시뮬레이터</h1><p>가입 담보를 선택하면 치료방법별 급여·비급여 예상 지급액과 대표 치료비를 한눈에 비교합니다.</p></div><div class="hero-actions"><button class="button" id="resetBtn" type="button">예시 초기화</button><button class="button primary" id="printBtn" type="button">요약정리 만들기 · PNG/PDF 저장</button></div></section>
 <section class="section" id="step01"><div class="section-head"><div><div class="step">STEP 01</div><h2>가입 담보 및 가입금액</h2></div><div class="section-desc">기본형과 실속형 중 하나만 선택할 수 있습니다. 비통치1은 판매중지된 기존 가입고객 분석용입니다.</div></div><div class="section-inner"><div class="plan-grid" id="planGrid"></div><div class="settings"><div><strong>비급여 담보 지급시점</strong><div class="settings-note">비통치2·비급여 주요치료형만 가입 첫 1년의 지급액 50% 적용</div></div><div><label><input type="radio" name="year" value="after" checked> 계약 1년 경과 후</label><label><input type="radio" name="year" value="first"> 계약 첫 1년 (보장개시 후)</label></div></div><div class="summary-strip" id="selectionSummary"></div><div id="selectionError" class="empty-warning hidden"></div></div></section>
 <section class="section" id="step02"><div class="section-head"><div><div class="step">STEP 02 · 핵심</div><h2>치료방법별 예상 보험금</h2></div><div class="section-desc">수술 · 약물 · 방사선의 모든 세부치료를 급여·비급여로 동시에 표시합니다. 금액을 누르면 포괄보장과 세부보장 산출 내역을 확인할 수 있습니다.</div></div><div class="key-points"><span><b>금액 단위</b> 만원</span><span><b>합산 방식</b> 포괄 + 특정치료 + 가입 담보별 합계</span><span><b>기준</b> 첫 치료·각 지급요건 충족</span></div><div id="coverageGroups" class="cost-groups coverage-groups" aria-label="수술·약물·방사선 예상 보험금 비교"></div><div class="table-caption">* 모바일에서는 표를 좌우로 스크롤해 보세요. 급여·비급여 각 열은 별도 시나리오이며 서로 더하는 금액이 아닙니다. 특정면역항암의 표적항암 추가 지급은 개별 요건 확인 전 기본 합계에 넣지 않고, 해당하는 경우의 추가 지급액을 별도로 표시합니다.</div><div class="extra-wrap"><details id="extraDetails" open><summary><span class="extra-title">기본형 추가 보장: 검사·통증완화·재활</span> <span class="show-more">펼치기 / 접기</span></summary><div class="extras-grid" id="extraRows"></div><p class="small-label">기본형 가입 시에만 지급 가능하며 검사·통증완화는 항목별 연간 1회, 재활은 1일 1회·연간 합산 20회 등 약관 조건 적용.</p></details></div><div class="disclaimer">이 화면은 교육·상담용 예상 지급액이며 실제 보험금 지급을 확정하지 않습니다. 이전 지급이 없는 단일 치료 사건을 가정하고, 지급횟수·보장 대상 여부·보험계약별 약관판본은 별도 확인해야 합니다. 비통치1 지급액은 구약관 원본이 없어 교육 리플렛을 기준으로 적용했습니다.</div></section>
 <section class="section" id="step03"><div class="section-head"><div><div class="step">STEP 03</div><h2>대표 치료비와 예상 보험금 비교</h2></div><div class="section-desc">STEP 02와 동일한 치료방법을 사용합니다. 수술은 1회, 약물·방사선은 대표 기간과 횟수를 기준으로 계산합니다.</div></div><div class="key-points"><span><b>치료비</b> 공개가격·약가·건강보험 수가 기반</span><span><b>차액</b> 예상 보험금 − 기준 치료비</span><span><b>비급여</b> 일부 약가 100%·수가 100% 모형</span></div><div id="costGroups" class="cost-groups" aria-label="수술·약물·방사선 치료비 비교"></div><div class="table-caption">* 모바일에서는 표를 좌우로 스크롤해 보세요. 금액은 만원 단위로 반올림. '-'는 비용 근거 미확보를 뜻하며 치료비가 0원이라는 뜻이 아닙니다. 일부 기간은 환자 평균이 아니라 대표 프로토콜입니다.</div><div class="disclaimer">항암제 급여 적용은 암종·치료차수·허가·산정특례 등 조건에 따라 달라집니다. 3D-CRT·IMRT의 비급여 금액은 병원 고시가격이 아닌 수가 100% 환산 모형입니다. CAR-T 급여 약가 5% 모형은 본인부담상한제 적용 전 값입니다. 진료비에는 검사·입원·부작용 치료 등 추가 항목이 포함될 수 있습니다. 특정면역항암에서 표적항암 보장까지 받을 경우의 추가금액은 STEP 03 기본 차액에 포함하지 않습니다. 교육용 정액보험금과 치료비 차액은 실제 환자의 최종 부담액이나 보험금 지급확정액이 아닙니다.</div></section>
-<footer class="foot"><span>제작 · 탄방케어링 오선근 CM</span><span>데이터 기준: 특별약관 106/108/112/114 · 비통치1 2025-10 교육 리플렛 · STEP03 2026-11-06 기준표</span><span>브라우저에서만 계산 · 개인정보 전송 없음</span></footer></main><section id="printReport" class="print-report" aria-label="인쇄용 보장 요약 보고서"></section>
+<footer class="foot"><span>제작 · 탄방케어링 오선근 CM</span><span>데이터 기준: 특별약관 106/108/112/114 · 비통치1 2025-10 교육 리플렛 · STEP03 2026-11-06 기준표</span><span>브라우저에서만 계산 · 개인정보 전송 없음</span></footer></main><section id="printReport" class="print-report" aria-label="인쇄용 보장 요약 보고서"></section><dialog id="reportDialog" class="report-dialog" aria-label="암통치 요약정리 미리보기"><div class="report-head"><strong>암통치 요약정리 미리보기</strong><button type="button" class="button" id="reportClose">닫기</button></div><div class="report-image-wrap"><img id="reportImage" alt="현재 가입 담보와 핵심 보장, 치료비 대응 사례를 정리한 A4 한 장 보고서"></div><div class="report-actions"><button type="button" class="button" id="reportPng">이미지(PNG) 저장</button><button type="button" class="button primary" id="reportPdf">인쇄 · PDF 저장</button></div></dialog>
 <script>/* 암통합치료비 교육·상담용 단일 치료 시나리오 엔진
  * 화폐 단위: 만원. 데이터 기준: 최신 약관 106/108/112/114, 비통치1 교육 리플렛.
  * 기존 지급기록/소진관리는 고의로 구현하지 않는다.
@@ -346,53 +330,140 @@
    }  function redraw(){drawPlans();redrawSummary();renderCoverage();renderExtras();renderCosts();}
   document.querySelectorAll('input[name="year"]').forEach(r=>r.addEventListener('change',e=>{selection.firstYear=e.currentTarget.value==='first';redraw();}));
 
-  // v1.5 - 한 장 요약 인쇄: 화면 STEP 02/03을 중복 출력하지 않고 같은 계산엔진 값을 한 표로 합친다.
-  // 기간·횟수는 화면에 사용한 대표 치료기간·횟수의 간략 표기이며 별도의 비용 가정을 만들지 않는다.
-  function printTiming(row){
-    if(row.category==='수술') return '수술 1회';
-    const p=String(row.period||'').replace(/\s*\(실제 평균 아님\)/g,'').replace('1년 비용 비교기간','1년').replace('전체 치료과정','전체');
-    const f=String(row.frequency||'');
-    return p+' · '+f;
-  }
-  function printBenefit(value){
-    if(value===null||value===undefined) return '<span class="pr-unknown">—</span>';
-    return nf.format(value);
-  }
-  function printDelta(value){
-    if(value===null||value===undefined) return '<span class="pr-unknown">—</span>';
-    const cls=value>=0?'pr-positive':'pr-negative';
-    return `<span class="${cls}">${value>0?'+':value<0?'−':''}${nf.format(Math.abs(value))}</span>`;
+  // v1.6: 화재보험 시뮬레이터와 같은 별도 A4 요약정리 (원래 지급 계산 엔진과 기준 치료비는 변경하지 않음).
+  // 전 치료 항목의 화면 표를 재출력하지 않고, 상담 핵심 9개 보장과 대표 5개 비용 대응 사례를 선별해 배치한다.
+  const REP_W=1240, REP_H=1754, REP_SCALE=2;
+  const RC={red:'#EF3B24',redDeep:'#CC3426',ink:'#203247',sub:'#57687C',muted:'#718092',line:'#E2E7EC',pale:'#F5F7FA',cream:'#FFF3F0',white:'#FFFFFF',green:'#16705B'};
+  let reportCanvas=null;
+  const pickCost=id=>costs.find(r=>r.id===id);
+  const stamp=()=>new Intl.DateTimeFormat('ko-KR',{year:'numeric',month:'2-digit',day:'2-digit'}).format(new Date());
+  function buildSummaryCanvas(){
+    const c=document.createElement('canvas');c.width=REP_W*REP_SCALE;c.height=REP_H*REP_SCALE;
+    const ctx=c.getContext('2d',{alpha:false});ctx.scale(REP_SCALE,REP_SCALE);
+    const text=(value,x,y,size=20,color=RC.ink,weight=600,limit=0)=>{
+      let f=size;
+      const str=String(value??'—');
+      do{ctx.font=`${weight} ${f}px Pretendard, "Noto Sans CJK KR", "Malgun Gothic",sans-serif`;
+        if(!limit||ctx.measureText(str).width<=limit||f<=14)break;f-=1;
+      }while(true);
+      ctx.fillStyle=color;ctx.textBaseline='top';ctx.fillText(str,x,y);
+    };
+    const rr=(x,y,w,h,r,fill,stroke)=>{
+      ctx.beginPath();ctx.roundRect(x,y,w,h,r);
+      if(fill){ctx.fillStyle=fill;ctx.fill()}
+      if(stroke){ctx.strokeStyle=stroke;ctx.lineWidth=1.5;ctx.stroke()}
+    };
+    const rule=(x,y,w,color=RC.line)=>{ctx.fillStyle=color;ctx.fillRect(x,y,w,1.5)};
+    const fmt=n=>n===null||n===undefined?'—':nf.format(n)+'만원';
+    const fmtDelta=n=>n===null||n===undefined?'비교불가':(n>=0?'+':'−')+nf.format(Math.abs(n))+'만원';
+    const chosen=Object.entries(E.PLANS).filter(([key])=>selection[key]!==null);
+    ctx.fillStyle=RC.white;ctx.fillRect(0,0,REP_W,REP_H);
+    ctx.fillStyle=RC.red;ctx.fillRect(0,0,REP_W,13);
+    text('meritz',62,45,32,RC.redDeep,900);
+    text('교육 · 상담용',184,55,18,RC.muted,650);
+    text('작성일 '+stamp(),953,57,19,RC.muted,550);
+    text('암통합치료비 보장 요약정리',60,104,43,RC.ink,850,1080);
+    text('선택한 담보를 기준으로 예상 지급액과 대표 치료비를 간단히 비교합니다.',62,172,21,RC.sub,550,1090);
+    rule(60,212,1120,'#D8E0E8');
+
+    text('01',62,241,23,RC.red,850);text('가입 담보 및 금액',107,240,26,RC.ink,830);
+    const timing=selection.firstYear?'계약 첫 1년 · 비급여 일부 담보 50%':'계약 1년 경과 후 기준';
+    text(timing,770,242,18,RC.sub,630,410);
+    rr(60,285,1120,175,16,RC.pale);
+    const slots=chosen.length?chosen:[['none',{name:'선택한 담보 없음'}]];
+    slots.slice(0,4).forEach(([key,plan],idx)=>{
+      const cx=78+(idx%2)*550,cy=304+Math.floor(idx/2)*77;
+      rr(cx,cy,530,62,8,RC.white,'#E5EAEF');
+      text(plan.name,cx+17,cy+11,19,RC.sub,700,325);
+      text(key==='none'?'—':nf.format(selection[key])+'만원',cx+385,cy+9,24,RC.ink,850,135);
+      if(key==='non1')text('기존 가입 분석용',cx+17,cy+38,12,RC.redDeep,630);
+    });
+    if(chosen.length===0)text('STEP 01에서 담보를 선택하면 이 요약에 반영됩니다.',80,431,14,RC.redDeep,600);
+
+    text('02',62,485,23,RC.red,850);text('핵심 보장금액',107,484,26,RC.ink,830);
+    text('포괄보장 + 해당 특정치료 보장을 합산한 교육용 예상금액',589,490,17,RC.sub,540,560);
+    const highlights=[
+      ['일반암 수술','급여','surg_stomach',false],
+      ['다빈치 로봇수술','비급여 · 특정암 제외','robot_general',true],
+      ['전립선암 로봇수술','비급여 · C61','robot_prostate',true],
+      ['일반 항암약물','급여','chemo_standard',false],
+      ['표적항암약물','비급여','target_tagrisso',true],
+      ['특정면역항암','비급여','immune_keytruda',true],
+      ['세기조절방사선','급여 · IMRT','rad_imrt',false],
+      ['양성자방사선','비급여','rad_proton',true],
+      ['중입자치료','비급여 · 일반 방사선','rad_carbon',true]
+    ];
+    highlights.forEach(([name,type,id,non],i)=>{
+      const col=i%3,row=Math.floor(i/3),x=60+col*380,y=535+row*134;
+      rr(x,y,360,118,11,RC.white,'#DCE3EA');
+      rr(x+12,y+11,7,34,3,non?'#D96550':'#6687AD');
+      text(name,x+29,y+13,22,RC.ink,800,320);
+      text(type,x+29,y+43,15,RC.muted,560,322);
+      const v=E.evaluate(id,selection,non).total;
+      text(fmt(v),x+29,y+73,28,v?RC.redDeep:RC.sub,850,325);
+    });
+
+    text('03',62,966,23,RC.red,850);text('대표 치료비 대응',107,965,26,RC.ink,830);
+    text('차액 = 예상 보험금 − 기준 치료비',805,973,17,RC.sub,560,360);
+    rr(60,1014,1120,48,8,'#ECF1F5');
+    text('치료 사례 · 기간/횟수',78,1027,18,RC.sub,800);
+    text('기준 치료비',664,1027,18,RC.sub,800);
+    text('예상 보험금',873,1027,18,RC.sub,800);
+    text('단순 차액',1047,1027,18,RC.sub,800);
+    const examples=[
+      ['다빈치 로봇수술','수술 1회 · 비급여','robot_general',true],
+      ['표적항암(타그리소)','1년 · 365정 · 비급여','target_tagrisso',true],
+      ['면역항암(키트루다)','1년 · 17회 · 비급여','immune_keytruda',true],
+      ['세기조절방사선','약 5주 · 25회 · 급여','rad_imrt',false],
+      ['중입자치료','약 3주 · 12회 · 비급여','rad_carbon',true]
+    ];
+    examples.forEach(([name,timing,id,non],i)=>{
+      const r=pickCost(id),v=E.priceComparison(id,selection,r),side=non?v.noncovered:v.insured;
+      const y=1068+i*80;
+      if(i%2===0)rr(60,y-2,1120,77,8,'#F8FAFB');
+      text(name,78,y+8,21,RC.ink,780,430);
+      text(timing,78,y+38,16,RC.muted,550,540);
+      text(fmt(side.price),663,y+24,21,RC.ink,760,195);
+      text(fmt(side.benefit),871,y+24,21,RC.ink,780,165);
+      text(fmtDelta(side.diff),1030,y+24,19,side.diff===null?RC.muted:(side.diff>=0?RC.green:RC.redDeep),820,144);
+    });
+
+    rr(60,1499,1120,138,10,'#FFF5F2');
+    text('읽는 방법',80,1517,20,RC.redDeep,850);
+    text('• 금액은 해당 치료를 처음 받은 경우의 교육용 예상치입니다. 실제 지급요건·약관을 별도 확인하세요.',80,1551,17,RC.ink,560,1070);
+    text('• 치료비는 공개가격·약가·수가 등의 대표 기준이며 실제 본인부담액이나 실손보험 지급액이 아닙니다.',80,1582,17,RC.ink,560,1070);
+    text('• 면역항암 중 표적항암 추가 지급 가능액은 자동 합계에서 제외했습니다. 전체 항목은 웹 계산기를 참고하세요.',80,1612,16,RC.sub,550,1070);
+    rule(60,1681,1120);
+    text('제작 · 탄방케어링 오선근 CM',60,1699,18,RC.sub,650);
+    text('자료 기준 2026.11 · 보험금 청구 확정 자료 아님',710,1699,16,RC.muted,570,470);
+    return c;
   }
   function renderPrintReport(){
-    const chosen=Object.entries(E.PLANS).filter(([id])=>selection[id]!==null);
-    const errors=E.validateSelection(selection);
-    const date=new Date().toLocaleDateString('ko-KR',{year:'numeric',month:'2-digit',day:'2-digit'});
-    const lines=[];
-    for(const [group,rows] of Object.entries(groups)){
-      lines.push(`<tr class="pr-group"><td colspan="8">${safe(group)} · ${rows.length}개 치료방법</td></tr>`);
-      for(const r of rows){
-        const c=E.priceComparison(r.id,selection,r);
-        lines.push(`<tr data-print-treatment="${safe(r.id)}"><td class="pr-name">${safe(r.name)}</td><td class="pr-timing">${safe(printTiming(r))}</td>`+
-          `<td class="pr-number">${printBenefit(c.insured.price)}</td><td class="pr-number">${printBenefit(c.insured.benefit)}</td><td class="pr-number">${printDelta(c.insured.diff)}</td>`+
-          `<td class="pr-number">${printBenefit(c.noncovered.price)}</td><td class="pr-number">${printBenefit(c.noncovered.benefit)}</td><td class="pr-number">${printDelta(c.noncovered.diff)}</td></tr>`);
-      }
-    }
-    const planText=chosen.length?chosen.map(([id,p])=>`${safe(p.name)} ${nf.format(selection[id])}만원${id==='non1'?' (기존 가입고객용)':''}`).join(' · '):'선택한 담보 없음';
-    const rule=selection.firstYear?'계약 후 첫 1년 기준 (비급여Ⅱ·주요치료형 50% 적용)':'계약 후 1년 경과 기준';
-    const html=`<div class="pr-heading"><div><h1>암통합치료비 보장 요약</h1><p>교육·상담용 · 치료방법별 예상 보험금과 기준 치료비를 하나의 표로 비교</p></div><div class="pr-stamp">출력일 ${safe(date)}<br>금액 단위: 만원</div></div>`+
-      `<div class="pr-plan-box"><div class="pr-plan-title">가입 담보 및 금액</div><div class="pr-plan-items">${planText}</div><div class="pr-plan-sub">${safe(rule)}</div></div>`+
-      (errors.length?`<div class="pr-note">설정 확인: ${errors.map(safe).join(' / ')}</div>`:'')+
-      `<div class="pr-summary-line"><strong>치료방법별 통합 비교</strong><span>차액 = 예상 보험금 − 기준 치료비 / '—'는 비용 자료가 없음을 뜻함</span></div>`+
-      `<table aria-label="치료방법별 보험금 및 기준 치료비 요약"><colgroup><col style="width:23%"><col style="width:17%"><col style="width:10%"><col style="width:10%"><col style="width:9%"><col style="width:10%"><col style="width:11%"><col style="width:10%"></colgroup>`+
-      `<thead><tr><th rowspan="2">치료방법</th><th rowspan="2">기간·횟수 기준</th><th colspan="3">급여</th><th colspan="3">비급여·전액부담</th></tr>`+
-      `<tr><th>기준 치료비</th><th>예상 보험금</th><th>차액</th><th>기준 치료비</th><th>예상 보험금</th><th>차액</th></tr></thead><tbody>${lines.join('')}</tbody></table>`+
-      `<div class="pr-note">이 자료는 해당 치료를 처음 받는 경우의 교육용 금액 비교입니다. 실제 지급은 계약 약관·질병·치료 요건에 따라 달라집니다. 치료비는 통계·공개가격·약가·수가를 이용한 대표값 또는 계산모형으로 실제 청구액과 다를 수 있습니다. 면역항암에서 표적항암 추가 지급 가능액과 기본형의 검사·통증·재활 상세내역은 웹 화면에서 확인하세요.${selection.non1!==null?' 비통치1은 리플렛 기준 교육용 금액입니다.':''}</div>`+
-      `<div class="pr-footer"><span>제작 · 탄방케어링 오선근 CM</span><span>근거: 특별약관 106·108·112·114 / 비통치1 리플렛 / STEP 03 대표 치료비 기준표</span><span>총 ${costs.length}개 치료방법</span></div>`;
-    $('printReport').innerHTML=html;
-    return {rows:costs.length,categories:Object.keys(groups).length};
+    reportCanvas=buildSummaryCanvas();
+    const image=reportCanvas.toDataURL('image/png');
+    $('printReport').innerHTML=`<img src="${image}" alt="암통치 보장 요약정리 A4 보고서">`;
+    $('reportImage').src=image;
+    return {cards:9,comparisons:5,selected:Object.entries(E.PLANS).filter(([id])=>selection[id]!==null).length};
   }
+  const reportDialog=$('reportDialog');
+  $('printBtn').addEventListener('click',async()=>{
+    try{if(document.fonts?.ready)await document.fonts.ready;renderPrintReport();reportDialog.showModal();}
+    catch(err){console.error(err);alert('보고서를 생성하지 못했습니다. 다시 시도해 주세요.');}
+  });
+  $('reportClose').addEventListener('click',()=>reportDialog.close());
+  reportDialog.addEventListener('click',event=>{if(event.target===reportDialog)reportDialog.close();});
+  $('reportPng').addEventListener('click',()=>{
+    if(!reportCanvas)renderPrintReport();
+    reportCanvas.toBlob(blob=>{
+      if(!blob){alert('PNG 파일을 생성하지 못했습니다.');return;}
+      const a=document.createElement('a'),url=URL.createObjectURL(blob);
+      a.href=url;a.download='암통치_보장요약정리_'+new Date().toISOString().slice(0,10)+'.png';
+      document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),10000);
+    },'image/png');
+  });
+  $('reportPdf').addEventListener('click',()=>{renderPrintReport();window.print();});
+  window.addEventListener('beforeprint',()=>{renderPrintReport();});
 
-  $('printBtn').addEventListener('click',()=>{renderPrintReport();window.print();});
   $('resetBtn').addEventListener('click',()=>{
     Object.assign(selection,E.makeSelection());document.querySelector('input[name="year"][value="after"]').checked=true;
     openDetail=null;redraw();
