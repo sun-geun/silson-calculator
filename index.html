@@ -127,12 +127,51 @@
 .inj-exception{grid-column:1/-1;display:flex;align-items:center;gap:10px;margin:2px 0 1px;padding:11px 12px;border:1px solid #F2D6CB;border-radius:12px;background:#FFF8F4;font-size:13px;font-weight:800;color:#5D3026;line-height:1.45;cursor:pointer}
 .inj-exception input[type="checkbox"]{width:19px;min-width:19px;height:19px;min-height:19px;margin:0;accent-color:#EF3B24;cursor:pointer}
 .inj-exception small{display:block;font-size:11px;font-weight:500;color:#72594E;margin-top:3px}
+
+/* Header alignment & authorship - layout only, calculation script unchanged */
+.creator-top{margin:0 0 10px;font-size:12px;color:#6D6E71;font-weight:800}
+.header{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:start;gap:7px 18px;margin-bottom:24px}
+.header-main{min-width:0}
+.header .actions{display:flex;gap:8px;flex-wrap:nowrap;margin-top:20px;align-self:start}
+.header .sub{grid-column:1/-1;font-size:14px;line-height:1.5;white-space:nowrap;max-width:none;margin:2px 0 0;min-width:0}
+.page-footer{margin:25px 0 0;text-align:center;line-height:1.75}
+.page-footer .footer-title{font-size:13px;color:#202124;font-weight:800}
+.page-footer .footer-maker{font-size:12px;color:#2C3440;font-weight:800}
+.page-footer .footer-note{font-size:11px;color:#848991}
+@media(max-width:1100px){
+  .header .sub{white-space:normal}
+}
+@media(max-width:820px){
+  .header{grid-template-columns:1fr;gap:9px}
+  .header-main{grid-row:1}
+  .header .sub{grid-row:2;grid-column:1;white-space:normal}
+  .header .actions{grid-row:3;grid-column:1;margin-top:7px;flex-wrap:wrap;width:100%}
+  .header .actions button{flex:1 1 auto}
+}
+@media(max-width:520px){
+  .header .actions{gap:6px}
+  .header .actions button{font-size:12px;padding:0 10px}
+  .creator-top{font-size:11px}
+}
+
 </style>
 </head>
 <body>
 <div class="wrap">
 <div class="topline"></div>
-<header class="header"><div><div class="brand">실손의료비 웹 계산기</div><h1>한 번 입력하고 1~5세대를 동시에 비교</h1><p class="sub">일반 비급여와 3대 비급여를 분리 입력합니다. 1·2세대는 해당 세대 구조에 맞게 합산하고, 3·4·5세대는 별도 특약 기준으로 계산합니다.</p></div><div class="actions"><button type="button" class="summary-open summary-open-trigger">한 장 요약본 만들기</button><button type="button" id="sample">교육 예시</button><button type="button" id="reset" class="primary">전체 초기화</button></div></header>
+<div class="creator-top">제작 | 오선근 CM</div>
+<header class="header">
+  <div class="header-main">
+    <div class="brand">실손의료비 웹 계산기</div>
+    <h1>한 번 입력하고 1~5세대를 동시에 비교</h1>
+  </div>
+  <div class="actions">
+    <button type="button" class="summary-open summary-open-trigger">한 장 요약본 만들기</button>
+    <button type="button" id="sample">교육 예시</button>
+    <button type="button" id="reset" class="primary">전체 초기화</button>
+  </div>
+  <p class="sub">병원 비급여 합계에 3대 비급여 금액을 포함해 입력합니다. 1·2세대는 전체 의료비, 3~5세대는 별도 특약 기준으로 계산합니다.</p>
+</header>
 <main class="layout">
 <section class="card">
 <h2 class="section-title">영수증·공통조건 <span class="pill">1회 입력</span></h2>
@@ -150,7 +189,11 @@
 <div class="sep"><div class="section-title">5세대</div><div class="grid3"><label>급여 입원 자기부담 누계<input id="g5priorSelf" value="0" inputmode="numeric"></label><label>중증 입원 자기부담 누계<input id="g5sevSelf" value="0" inputmode="numeric"></label><label>일반 비급여 기지급 금액<input id="g5ncPaid" value="0" inputmode="numeric"></label><label>비급여 통원 기사용<input id="g5ncCount" value="0" inputmode="numeric"></label><label>도수 기지급 금액<input id="g5manPaid" value="0" inputmode="numeric"></label><label>도수 기사용 횟수<input id="g5manCount" value="0" inputmode="numeric"></label><label class="inj-exception"><input id="g5injException" type="checkbox"><span>항암제·항생제(항진균제 포함)·희귀의약품 목적 주사 <small>위에 입력한 비급여 주사금액 전액이 해당할 때 체크 · 일반 비급여로 산정</small></span></label><label>주사 기지급 금액<input id="g5injPaid" value="0" inputmode="numeric"></label><label>주사 기사용 횟수<input id="g5injCount" value="0" inputmode="numeric"></label><label>MRI 기지급 금액<input id="g5mriPaid" value="0" inputmode="numeric"></label></div></div>
 </details><div id="warn" class="warn"></div></section>
 <section><div class="totalbox"><div class="total-label">총 실제 의료비</div><div id="total" class="total-value">0원</div><div id="conditionSummary" class="small"></div></div><div class="card barbox"><div class="section-title">세대별 예상 보험금 비교</div><div id="bars"></div></div><div id="results" class="result-list"></div><div class="summary-action-row"><button type="button" class="summary-open-trigger">결과 요약본 · 출력 / 이미지 저장</button></div><div class="disclaimer"><b style="color:var(--text)">교육용 예상 계산입니다.</b> 1세대는 표준화 이전이라 실제 증권·약관 조건을 우선 확인해야 하며, 실제 보험금은 가입시기·담보·한도·누적 지급액·횟수·의학적 필요성 등에 따라 달라질 수 있습니다.</div></section>
-</main><footer>실손의료비 교육용 계산기<br>오선근 CM</footer></div>
+</main><footer class="page-footer">
+  <div class="footer-title">실손의료비 교육용 시뮬레이터</div>
+  <div class="footer-maker">제작 | 오선근 CM</div>
+  <div class="footer-note">무단 복제·재배포 금지 · 공식 링크에서 사용</div>
+</footer></div>
 <script>
 (()=>{const $=id=>document.getElementById(id),won=v=>Math.max(0,Math.round(Number.isFinite(v)?v:0)).toLocaleString('ko-KR')+'원',pct=v=>((Number.isFinite(v)?v:0)*100).toFixed(1)+'%',num=id=>{const v=Number(String($(id)?.value??'').replace(/[^0-9.-]/g,''));return Number.isFinite(v)?Math.max(0,v):0},cap=(v,m)=>Math.max(0,Math.min(v,m)),hospMin=()=>({clinic:10000,hospital:15000,general:15000,tertiary:20000}[$('hospital').value]||15000),g45PayMin=()=>['general','tertiary'].includes($('hospital').value)?20000:10000,roomPay=(room,days)=>Math.min(room*.5,Math.max(0,days)*100000),special=(amt,minDed,rate,prior,limit,count=null,countLimit=null)=>{if(countLimit!==null&&count>=countLimit)return 0;return Math.min(Math.max(0,limit-prior),Math.max(0,amt-Math.max(minDed,amt*rate)))},splitLimits=id=>$(id).value==='20_10'?[200000,100000]:[250000,50000],hospitalName=()=>({clinic:'의원',hospital:'병원',general:'종합병원',tertiary:'상급종합병원'}[$('hospital').value]);
 function updateG2Products(){const p=$('g2period').value,s=$('g2product'),old=s.value,o=p==='early'?[['early90','초기 표준화 90%']]:p==='mid'?[['sel90','선택형 90%'],['std80','표준형 80%']]:[['ii','선택형II 90/80'],['std80','표준형 80%']];s.innerHTML=o.map(([v,t])=>`<option value="${v}">${t}</option>`).join('');s.value=o.some(x=>x[0]===old)?old:o[0][0]}
