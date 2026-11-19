@@ -29,7 +29,7 @@ jobs:
           cp node_modules/tesseract.js-core/tesseract-core*.wasm.js ../vendor/tesseract/core/
           cp node_modules/tesseract.js-core/tesseract-core*.wasm ../vendor/tesseract/core/
           cp node_modules/pdfjs-dist/LICENSE ../vendor/LICENSE-pdfjs.txt
-          cp node_modules/onnxruntime-web/LICENSE ../vendor/LICENSE-onnxruntime.txt
+          if test -f node_modules/onnxruntime-web/LICENSE; then cp node_modules/onnxruntime-web/LICENSE ../vendor/LICENSE-onnxruntime.txt; else printf '%s\n' 'ONNX Runtime Web: see https://github.com/microsoft/onnxruntime/blob/main/LICENSE' > ../vendor/LICENSE-onnxruntime.txt; fi
           if test -f node_modules/tesseract.js/LICENSE.md; then cp node_modules/tesseract.js/LICENSE.md ../vendor/LICENSE-tesseract.txt; fi
           cd ..
           for lang in kor eng; do curl -fLSs --retry 3 "https://raw.githubusercontent.com/tesseract-ocr/tessdata_fast/main/${lang}.traineddata" | gzip -9 > "vendor/tesseract/lang/${lang}.traineddata.gz"; done
