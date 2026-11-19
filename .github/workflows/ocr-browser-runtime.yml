@@ -1,0 +1,48 @@
+name: Build local browser OCR runtime
+on:
+  push:
+    branches: [ocr-browser-runtime-build-20261119]
+  workflow_dispatch:
+jobs:
+  browser-runtime:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    permissions:
+      contents: read
+    steps:
+      - name: Download published open-source browser runtimes
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p package vendor/tesseract/core vendor/tesseract/lang
+          cd package
+          npm init -y >/dev/null
+          npm install --no-save --ignore-scripts --no-fund --no-audit \
+            pdfjs-dist@4.10.38 onnxruntime-web@1.21.0 tesseract.js@5.1.1
+          cp node_modules/pdfjs-dist/build/pdf.min.mjs ../vendor/
+          cp node_modules/pdfjs-dist/build/pdf.worker.min.mjs ../vendor/
+          cp node_modules/onnxruntime-web/dist/ort.wasm.min.mjs ../vendor/
+          cp node_modules/onnxruntime-web/dist/ort-wasm-simd-threaded.mjs ../vendor/
+          cp node_modules/onnxruntime-web/dist/ort-wasm-simd-threaded.wasm ../vendor/
+          cp node_modules/tesseract.js/dist/tesseract.min.js ../vendor/tesseract/
+          cp node_modules/tesseract.js/dist/worker.min.js ../vendor/tesseract/
+          cp node_modules/tesseract.js-core/tesseract-core*.wasm.js ../vendor/tesseract/core/
+          cp node_modules/tesseract.js-core/tesseract-core*.wasm ../vendor/tesseract/core/
+          cp node_modules/pdfjs-dist/LICENSE ../vendor/LICENSE-pdfjs.txt
+          cp node_modules/onnxruntime-web/LICENSE ../vendor/LICENSE-onnxruntime.txt
+          if test -f node_modules/tesseract.js/LICENSE.md; then cp node_modules/tesseract.js/LICENSE.md ../vendor/LICENSE-tesseract.txt; fi
+          cd ..
+          for lang in kor eng; do curl -fLSs --retry 3 "https://raw.githubusercontent.com/tesseract-ocr/tessdata_fast/main/${lang}.traineddata" | gzip -9 > "vendor/tesseract/lang/${lang}.traineddata.gz"; done
+          test $(stat -c%s vendor/pdf.min.mjs) -gt 100000
+          test $(stat -c%s vendor/pdf.worker.min.mjs) -gt 200000
+          test $(stat -c%s vendor/ort.wasm.min.mjs) -gt 20000
+          test $(stat -c%s vendor/ort-wasm-simd-threaded.wasm) -gt 1000000
+          sha256sum vendor/pdf.min.mjs vendor/pdf.worker.min.mjs vendor/ort.wasm.min.mjs vendor/ort-wasm-simd-threaded.mjs vendor/ort-wasm-simd-threaded.wasm > vendor/sha256sums.txt
+          du -sh vendor
+      - name: Package browser runtime assets
+        uses: actions/upload-artifact@v4
+        with:
+          name: ocr-browser-vendor-public-assets
+          path: vendor/
+          retention-days: 3
+          if-no-files-found: error
