@@ -1,0 +1,32 @@
+name: Package experimental browser PDF renderers
+on:
+  push:
+    branches: [ocr-browser-runtime-build-20261119]
+  workflow_dispatch:
+jobs:
+  package:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    permissions:
+      contents: read
+    steps:
+      - name: Download browser-capable renderers for isolated local accuracy evaluation
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p renderer
+          cd renderer
+          npm init -y >/dev/null
+          npm install --no-save --ignore-scripts --no-audit --no-fund mupdf@1.28.6
+          mkdir -p ../mupdf-evaluation
+          cp -a node_modules/mupdf/dist/ ../mupdf-evaluation/dist
+          cp node_modules/mupdf/LICENSE* ../mupdf-evaluation/ 2>/dev/null || true
+          cat node_modules/mupdf/package.json > ../mupdf-evaluation/package.json
+          du -sh ../mupdf-evaluation
+      - name: Upload diagnostic assets (no patient records)
+        uses: actions/upload-artifact@v4
+        with:
+          name: mupdf-wasm-diagnostic-assets
+          path: mupdf-evaluation/
+          retention-days: 2
+          if-no-files-found: error
