@@ -1,0 +1,32 @@
+name: Build permissive browser PDF renderer evaluation
+on:
+  push:
+    branches: [ocr-browser-runtime-build-20261119]
+  workflow_dispatch:
+jobs:
+  pdfium:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    permissions:
+      contents: read
+    steps:
+      - name: Download permissive PDFium WASM (no patient files)
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p pkg output
+          cd pkg
+          npm init -y >/dev/null
+          npm install --no-save --ignore-scripts --no-audit --no-fund '@embedpdf/pdfium@2'
+          find node_modules/@embedpdf/pdfium -maxdepth 3 -type f | head -60
+          cp -a node_modules/@embedpdf/pdfium/dist ../output/dist
+          cp node_modules/@embedpdf/pdfium/LICENSE* ../output/ || true
+          cp node_modules/@embedpdf/pdfium/package.json ../output/
+          du -sh ../output
+      - name: Share test binaries
+        uses: actions/upload-artifact@v4
+        with:
+          name: pdfium-permissive-diagnostic
+          path: output/
+          retention-days: 2
+          if-no-files-found: error
